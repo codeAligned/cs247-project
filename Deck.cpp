@@ -21,3 +21,15 @@ ostream& operator<<(ostream& os, const Deck &d) {
         cout << d.cards_.at(i); // Fix this later.
     }
 }
+
+vector<Hand*> Deck::dealCards(){
+    vector<Hand*> hands = vector<Hand*>();
+    for( int i=0;i<4;i++){
+        vector<Card*> temp = vector<Card*>();
+        for(int j=0;j<13;j++){
+            temp.push_back(cards_.at(13*i+j));
+        }
+        hands.push_back(new Hand(temp));
+    }
+    return hands;
+}

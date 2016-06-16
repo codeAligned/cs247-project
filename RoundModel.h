@@ -9,6 +9,9 @@ class RoundModel {
 public:
     RoundModel(std::vector<Player*>, Deck*);
     ~RoundModel();
+    std::vector<Player*> getPlayers();
+    Player* getPlayer(int playerID);
+    Deck* getDeck() const;
 private:
     std::vector<Player*> players_;
     std::vector<Card*> played_cards_;

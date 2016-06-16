@@ -8,10 +8,16 @@ RoundController::RoundController(vector<Player*> players) {
 }
 
 int RoundController::who7Spades() {
+
+
     return 1;
     // implement this
 }
 
 RoundController::~RoundController(){
     delete model_;
+}
+
+Player* RoundController::getPlayer(int playerID){
+    return model_->getPlayer(playerID);
 }

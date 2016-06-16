@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Card.h"
+#include "Hand.h"
 
 class Deck {
 public:
@@ -11,6 +12,7 @@ public:
     ~Deck();
     void shuffle();
     friend std::ostream& operator<<(std::ostream&, const Deck &);
+    std::vector<Hand*> dealCards();
 private:
     std::vector<Card*> cards_;
 };

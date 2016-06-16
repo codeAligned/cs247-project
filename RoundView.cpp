@@ -4,15 +4,15 @@ using namespace std;
 RoundView::RoundView(vector<Player*> players) {
     controller_ = new RoundController(players);
     int player_number = controller_->who7Spades();
-    cout << "A new round begins. It’s player "<< player_number
+    cout << "A new round begins. It's player "<< player_number
          << "'s turn to play" << endl;
     startTurns(player_number);
 }
 
 void RoundView::startTurns(int player_number) {
     // Pseudocode
-    if (controller_->getPlayer(player_number) == HumanPlayer) {
-        cout << "humane" << endl;
+    if (controller_->getPlayer(player_number)->isHuman()) {
+//        cout << "human" << endl;
         // cout << "Cards on the table:
         // Clubs: <list of clubs>
         // Diamonds: <list of diamonds>
@@ -22,7 +22,8 @@ void RoundView::startTurns(int player_number) {
         // Legal plays: <legal plays in your hand>" << endl;
     }
     else {
-        controller_->playTurn(player_number);
+//        controller_->playTurn(player_number);
+        cout <<"computer";
     }
 }
 

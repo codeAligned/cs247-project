@@ -6,6 +6,9 @@
 
 class Hand {
 public:
+    Hand();
+    ~Hand();
+    Hand(std::vector<Card*>);
     void play(Card);
     void discard(Card);
     std::vector<Card*> getDiscards();

@@ -13,6 +13,7 @@ public:
     ~RoundController();
     // void dealCards();
     int who7Spades();
+    Player* getPlayer(int);
     // bool isLegalPlay();
     // std::vector<Card> getClubs();
     // std::vector<Card> getDiamonds();

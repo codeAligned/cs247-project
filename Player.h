@@ -8,15 +8,17 @@
 class Player {
 public:
     Player();
+    Player(Hand*);
    ~Player();
     virtual bool isHuman();
     std::vector<Card*> getDiscards();
     std::vector<Card*> getCards();
     void discardCards(Card);
     void playCard(Card);
+    void setHand(Hand*);
     //virtual void playTurn();
 private:
-    Hand hand_;
+    Hand* hand_;
     int gameScore_;
 };
 
