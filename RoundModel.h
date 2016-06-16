@@ -7,12 +7,12 @@
 
 class RoundModel {
 public:
-    RoundModel(std::vector<Player*>);
+    RoundModel(std::vector<Player*>, Deck*);
     ~RoundModel();
 private:
     std::vector<Player*> players_;
     std::vector<Card*> played_cards_;
-    Deck deck_;
+    Deck* deck_;
 };
 
 #endif

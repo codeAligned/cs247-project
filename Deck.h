@@ -8,9 +8,11 @@
 class Deck {
 public:
     Deck();
+    ~Deck();
+    void shuffle();
     friend std::ostream& operator<<(std::ostream&, const Deck &);
 private:
-    std::vector<Card> cards_;
+    std::vector<Card*> cards_;
 };
 
 #endif

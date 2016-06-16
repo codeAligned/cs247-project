@@ -12,7 +12,7 @@ public:
     RoundController(std::vector<Player*>);
     ~RoundController();
     // void dealCards();
-    // Player who7Spades();
+    int who7Spades();
     // bool isLegalPlay();
     // std::vector<Card> getClubs();
     // std::vector<Card> getDiamonds();
