@@ -3,14 +3,16 @@
 
 #include <vector>
 #include "Card.h"
-#include "Player.h"
 
 class Hand {
 public:
-    void play();
+    void play(Card);
+    void discard(Card);
+    std::vector<Card*> getDiscards();
+    std::vector<Card*> getCards();
 private:
-    vector<Card> hand_;
-    vector<Card> discards_;
+    std::vector<Card*> cards_;
+    std::vector<Card*> discards_;
 };
 
 #endif

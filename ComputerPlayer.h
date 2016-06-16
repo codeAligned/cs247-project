@@ -1,7 +1,3 @@
-//
-// Created by sam on 2016-06-12.
-//
-
 #ifndef _COMPUTERPLAYER_
 #define _COMPUTERPLAYER_
 
@@ -10,8 +6,9 @@
 
 class ComputerPlayer: public Player {
 public:
-    ComputerPlayer(Player);
-    void playTurn();
+    ComputerPlayer();
+    // ComputerPlayer(Player);
+    // void playTurn();
     bool isHuman();
 private:
 };

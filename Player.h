@@ -1,27 +1,23 @@
-//
-// Created by sam on 2016-06-12.
-//
-
 #ifndef _PLAYER_
 #define _PLAYER_
 
 #include <vector>
 #include "Card.h"
+#include "Hand.h"
 
 class Player {
 public:
     Player();
-    ~Player();
-    std::vector<Card> getDiscard();
+   ~Player();
     virtual bool isHuman();
-    std::vector<Card> getCards();
-    void discardCard(Card);
+    std::vector<Card*> getDiscards();
+    std::vector<Card*> getCards();
+    void discardCards(Card);
     void playCard(Card);
-    virtual void playTurn();
+    //virtual void playTurn();
 private:
     Hand hand_;
     int gameScore_;
-
 };
 
 

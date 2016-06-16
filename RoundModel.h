@@ -1,18 +1,18 @@
-#ifndef _ROUNDCONTROLLER_
-#define _ROUNDCONTROLLER_
+#ifndef _ROUNDMODEL_
+#define _ROUNDMODEL_
 
 #include <vector>
-#include "RoundModel.h"
 #include "Player.h"
+#include "Deck.h"
 
 class RoundModel {
 public:
-    RoundModel();
+    RoundModel(std::vector<Player*>);
     ~RoundModel();
 private:
-    std::vector<Player> players_;
-    std::vector<Card> played_cards_;
-    std::vector<Card> deck_;
+    std::vector<Player*> players_;
+    std::vector<Card*> played_cards_;
+    Deck deck_;
 };
 
 #endif
