@@ -22,7 +22,7 @@ public:
     // std::vector<Card> calculateLegalPlay(Player);//?
     // void playCard(Player, Card);
     // void discardCard(Player, Card);
-    // std::vector<Card> deck();
+     Deck* getDeck() const;
     // void quit();
     // ComputerPlayer ragequit();
 private:

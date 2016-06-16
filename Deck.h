@@ -13,6 +13,7 @@ public:
     void shuffle();
     friend std::ostream& operator<<(std::ostream&, const Deck &);
     std::vector<Hand*> dealCards();
+    Card* at(int);
 private:
     std::vector<Card*> cards_;
 };

@@ -33,3 +33,7 @@ vector<Hand*> Deck::dealCards(){
     }
     return hands;
 }
+
+Card* Deck::at(int index){
+    return cards_.at(index);
+}

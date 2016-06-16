@@ -9,7 +9,7 @@ class RoundView {
 public:
     RoundView(std::vector<Player*>);
     ~RoundView();
-    void printThings();
+    void printDeck();
     void startTurns(int);
 private:
     RoundController* controller_;
