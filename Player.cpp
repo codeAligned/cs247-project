@@ -6,7 +6,9 @@ Player::Player(Hand* h) {
     hand_ = h;
 }
 
-Player::~Player() {}
+Player::~Player() {
+    delete hand_;
+}
 
 std::vector<Card*> Player::getDiscards() {
     return hand_->getDiscards();

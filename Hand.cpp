@@ -6,9 +6,9 @@ Hand::Hand(){
 }
 
 Hand::~Hand(){
-    for(int i =0;i<cards_.size();i++){
-        delete cards_.at(i);
-    }
+//    for(int i =0;i<cards_.size();i++){
+//        delete cards_.at(i);
+//    }
     for(int i =0;i<discards_.size();i++){
         delete discards_.at(i);
     }
