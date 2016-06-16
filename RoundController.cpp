@@ -13,7 +13,7 @@ int RoundController::who7Spades() {
         vector<Card*> tempHand = players.at(i)->getCards();
         for( int j=0; j<tempHand.size() ; j++){
             if(tempHand.at(j)->getRank() == static_cast<Rank>(6) && tempHand.at(j)->getSuit() == static_cast<Suit>(3)){
-                return i;
+                return i+1;
             }
         }
     }

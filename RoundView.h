@@ -13,6 +13,11 @@ public:
     void startTurns(int);
 private:
     RoundController* controller_;
+    void printClubs(Player*);
+    void printDiamonds(Player*);
+    void printHearts(Player*);
+    void printSpades(Player*);
+    void printHand(Player*);
 };
 
 #endif
