@@ -10,6 +10,7 @@ public:
     RoundView(std::vector<Player*>);
     ~RoundView();
     void printThings();
+    void startTurns(int);
 private:
     RoundController* controller_;
 };
