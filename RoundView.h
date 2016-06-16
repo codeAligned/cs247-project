@@ -18,6 +18,7 @@ private:
     void printHearts(Player*);
     void printSpades(Player*);
     void printHand(Player*);
+    void getCommand();
 };
 
 #endif

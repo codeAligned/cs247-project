@@ -1,6 +1,7 @@
 #include "Command.h"
 #include <cassert>
 #include <sstream>
+#include <iostream>
 using namespace std;
 
 istream &operator>>(istream &in, Command &c){
@@ -11,7 +12,9 @@ istream &operator>>(istream &in, Command &c){
 	stringstream ss(str);
 	
 	string cmd;
-	ss >> cmd;
+//	ss >> cmd;
+	cin >> cmd;
+	cout<<cmd;
 	
 	if (cmd == "play") {
 		c.type = PLAY;
@@ -26,7 +29,7 @@ istream &operator>>(istream &in, Command &c){
 	} else if (cmd == "ragequit") {
 		c.type = RAGEQUIT;
 	}
-	
+
 	assert(!in.fail() && !ss.fail() && c.type != BAD_COMMAND);
 	
 	return in;

@@ -1,4 +1,6 @@
 #include "RoundView.h"
+#include "Command.h"
+
 using namespace std;
 
 RoundView::RoundView(vector<Player*> players) {
@@ -25,6 +27,7 @@ void RoundView::startTurns(int player_number) {
         cout << "Spades: "; printSpades(controller_->getPlayer(player_number));
         cout << "Your hand: "; printHand(controller_->getPlayer(player_number));
 //         Legal plays: <legal plays in your hand>"
+        getCommand();
     }
     else {
 //        controller_->playTurn(player_number);
@@ -70,5 +73,31 @@ void RoundView::printDeck(){
             cout<<*deck->at(13*i+j)<<" ";
         }
         cout<<endl;
+    }
+}
+
+void RoundView::getCommand(){
+    Command cmd;
+    cin.clear();
+    cin>>cmd;
+
+    switch (cmd.type){
+        case PLAY:
+            cout<<cmd.type;
+            break;
+        case DISCARD:
+            cout<<cmd.type;
+            break;
+        case DECK:
+            cout<<cmd.type;
+            break;
+        case QUIT:
+            cout<<cmd.type;
+            break;
+        case RAGEQUIT:
+            cout<<cmd.type;
+            break;
+        default:
+            throw "Bad Command";
     }
 }
