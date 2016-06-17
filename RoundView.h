@@ -11,7 +11,7 @@ public:
     RoundView(std::vector<Player*>);
     ~RoundView();
     void printDeck();
-    void startTurns(int);
+    void startTurns(int*);
 private:
     RoundController* controller_;
     void printClubs(Player*);
@@ -19,9 +19,10 @@ private:
     void printHearts(Player*);
     void printSpades(Player*);
     void printHand(Player*);
-    Command getCommand(int*);
+    Command getCommand();
     void executeCommand(Command,int*);
-    void turnLoop(int);
+    void turnLoop(int*);
+    void startRoundLoop(int*);
 };
 
 #endif
