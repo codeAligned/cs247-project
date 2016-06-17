@@ -14,14 +14,13 @@ istream &operator>>(istream &in, Command &c){
 	string cmd;
 //	ss >> cmd;
 	cin >> cmd;
-	cout<<cmd;
 	
 	if (cmd == "play") {
 		c.type = PLAY;
-		ss >> c.card;
+		cin >> c.card;
 	} else if (cmd == "discard") {
 		c.type = DISCARD;
-		ss >> c.card;
+		cin >> c.card;
 	} else if (cmd == "deck") {
 		c.type = DECK;
 	} else if (cmd == "quit") {

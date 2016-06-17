@@ -1,5 +1,4 @@
 #include "RoundView.h"
-#include "Command.h"
 
 using namespace std;
 
@@ -9,6 +8,7 @@ RoundView::RoundView(vector<Player*> players) {
     cout << "A new round begins. It's player "<< player_number
          << "'s turn to play" << endl;
     printDeck();
+
     startTurns(player_number);
 }
 
@@ -17,21 +17,31 @@ RoundView::~RoundView() {
 }
 
 void RoundView::startTurns(int player_number) {
-    // Pseudocode
     if (controller_->getPlayer(player_number)->isHuman()) {
-        cout << "human" << endl;
-        cout << "Cards on the table:"<<endl;
-        cout << "Clubs: "; printClubs(controller_->getPlayer(player_number));
-        cout << "Diamonds: "; printDiamonds(controller_->getPlayer(player_number));
-        cout << "Hearts: "; printHearts(controller_->getPlayer(player_number));
-        cout << "Spades: "; printSpades(controller_->getPlayer(player_number));
-        cout << "Your hand: "; printHand(controller_->getPlayer(player_number));
-//         Legal plays: <legal plays in your hand>"
-        getCommand();
+        cout << "Cards on the table:" << endl;
+        cout << "Clubs: ";
+        printClubs(controller_->getPlayer(player_number));
+        cout << "Diamonds: ";
+        printDiamonds(controller_->getPlayer(player_number));
+        cout << "Hearts: ";
+        printHearts(controller_->getPlayer(player_number));
+        cout << "Spades: ";
+        printSpades(controller_->getPlayer(player_number));
+        cout << "Your hand: ";
+        printHand(controller_->getPlayer(player_number));
+        //         Legal plays: <legal plays in your hand>"
+        turnLoop(player_number);
     }
     else {
-//        controller_->playTurn(player_number);
-        cout <<"computer";
+        //        controller_->playTurn(player_number);
+    }
+}
+
+void RoundView::turnLoop(int player_number){
+    int tempNum = player_number;
+    while(tempNum == player_number) {
+        Command cmd = getCommand(&player_number);
+        executeCommand(cmd, &player_number);
     }
 }
 
@@ -76,26 +86,32 @@ void RoundView::printDeck(){
     }
 }
 
-void RoundView::getCommand(){
+Command RoundView::getCommand(int* player_number){
     Command cmd;
     cin.clear();
     cin>>cmd;
+    return cmd;
+}
 
+void RoundView::executeCommand(Command cmd,int* player_number){
     switch (cmd.type){
         case PLAY:
-            cout<<cmd.type;
+            cout<<"cmd:play";
+            *player_number += 1;
             break;
         case DISCARD:
-            cout<<cmd.type;
+            cout<<"cmd:discard";
+            *player_number += 1;
             break;
         case DECK:
-            cout<<cmd.type;
+            cout<<"cmd:deck";
+            printDeck();
             break;
         case QUIT:
-            cout<<cmd.type;
+            cout<<"cmd:quit";
             break;
         case RAGEQUIT:
-            cout<<cmd.type;
+            cout<<"cmd:ragequit";
             break;
         default:
             throw "Bad Command";

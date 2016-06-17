@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "RoundController.h"
+#include "Command.h"
 
 class RoundView {
 public:
@@ -18,7 +19,9 @@ private:
     void printHearts(Player*);
     void printSpades(Player*);
     void printHand(Player*);
-    void getCommand();
+    Command getCommand(int*);
+    void executeCommand(Command,int*);
+    void turnLoop(int);
 };
 
 #endif
