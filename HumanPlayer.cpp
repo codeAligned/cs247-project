@@ -4,6 +4,6 @@ HumanPlayer::HumanPlayer() {
 
 }
 
-bool HumanPlayer::isHuman() {
+bool HumanPlayer::isHuman() const {
     return true;
 }

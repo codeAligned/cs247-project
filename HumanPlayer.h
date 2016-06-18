@@ -9,7 +9,7 @@ public:
     // HumanPlayer(Player);
     HumanPlayer();
     // void playTurn();
-    virtual bool isHuman();
+    bool isHuman() const;
 private:
 
 };

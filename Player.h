@@ -10,7 +10,7 @@ public:
     Player();
     Player(Hand*);
    ~Player();
-    virtual bool isHuman();
+    virtual bool isHuman() const = 0;
     std::vector<Card*> getDiscards();
     std::vector<Card*> getCards();
     std::vector<Card*> getClubs();

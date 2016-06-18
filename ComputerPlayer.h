@@ -9,7 +9,7 @@ public:
     ComputerPlayer();
     // ComputerPlayer(Player);
     // void playTurn();
-    bool isHuman();
+    bool isHuman() const;
 private:
 };
 

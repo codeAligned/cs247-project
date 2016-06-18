@@ -20,11 +20,11 @@ void Player::discardCards(Card c){
     hand_->discard(c);
 }
 
-std::vector<Card*> Player::getDiscards() {
+vector<Card*> Player::getDiscards() {
     return hand_->getDiscards();
 }
 
-std::vector<Card*> Player::getCards() {
+vector<Card*> Player::getCards() {
     return hand_->getCards();
 }
 
@@ -41,7 +41,7 @@ vector<Card*> Player::getSpades() {
     return filterBySuit(static_cast<Suit>(3));
 }
 
-std::vector<Card*> Player::filterBySuit(Suit suit){
+vector<Card*> Player::filterBySuit(Suit suit){
     vector<Card*> temp = hand_->getCards();
     vector<Card*> ret = vector<Card*>();
     for(int i = 0; i<temp.size(); i++ ){
@@ -54,8 +54,4 @@ std::vector<Card*> Player::filterBySuit(Suit suit){
 
 void Player::setHand(Hand* hand){
     hand_ = hand;
-}
-
-bool Player::isHuman() {
-    throw "undefined";
 }

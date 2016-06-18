@@ -4,6 +4,6 @@ ComputerPlayer::ComputerPlayer() {
 
 }
 
-bool ComputerPlayer::isHuman(){
+bool ComputerPlayer::isHuman() const{
     return false;
 }
