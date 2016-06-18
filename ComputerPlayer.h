@@ -2,10 +2,9 @@
 #define _COMPUTERPLAYER_
 
 class RoundController;
-
+class Player;
 #include <vector>
-#include "Player.h"
-#include "RoundController.h"
+//#include "Player.h"
 
 class ComputerPlayer: public Player {
 public:

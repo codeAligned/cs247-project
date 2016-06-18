@@ -57,3 +57,7 @@ vector<Card*> Player::filterBySuit(Suit suit){
 void Player::setHand(Hand* hand){
     hand_ = hand;
 }
+
+void Player::playTurn(RoundController* controller){
+    throw "Parent has no specified behaviour";
+}
