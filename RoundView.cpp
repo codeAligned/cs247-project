@@ -114,12 +114,12 @@ void plusPlayerNum(int* player_number){
 }
 
 void RoundView::executeCommand(Command cmd,int* player_number){
+    Player* currentPlayer = controller_->getPlayer(*player_number);
     switch (cmd.type){
-        case PLAY: {
-            Player* p = controller_->getPlayer(*player_number);
-
-            if ( controller_->isLegalPlay(p, cmd.card) ) {
-                controller_->playCard(p, cmd.card);
+        case PLAY:
+            if ( controller_->isLegalPlay(currentPlayer, cmd.card) ) {
+                controller_->playCard(currentPlayer, cmd.card);
+                cout << "Player " << *player_number << " plays " << cmd.card << "." << endl;
                 plusPlayerNum(player_number);
             }
             else {
@@ -127,9 +127,10 @@ void RoundView::executeCommand(Command cmd,int* player_number){
                 executeCommand(getCommand(), player_number);
             }
             break;
-        }
         case DISCARD:
             cout<<"cmd:discard"<<endl;
+            controller_->discardCard(currentPlayer, cmd.card);
+            cout << "Player " << *player_number << " discards " << cmd.card << "." << endl;
             plusPlayerNum(player_number);
             break;
         case DECK:
