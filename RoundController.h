@@ -19,10 +19,11 @@ public:
     // std::vector<Card> getDiamonds();
     // std::vector<Card> getSpades();
     // std::vector<Card> getHearts();
-     std::vector<Card*> calculateLegalPlay(Player*) const;//?
+     std::vector<Card*> calculateLegalPlay(Player*) const;
      void playCard(Player*, Card);
      void discardCard(Player*, Card);
      Deck* getDeck() const;
+    void playTurn(Player*);
     // void quit();
     // ComputerPlayer ragequit();
 private:

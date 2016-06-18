@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "RoundView.h"
 
 using namespace std;
@@ -14,6 +15,13 @@ RoundView::RoundView(vector<Player*> players) {
 
 RoundView::~RoundView() {
     delete controller_;
+}
+
+void plusPlayerNum(int* player_number){
+    *player_number = *player_number+1;
+    if(*player_number == 5){
+        *player_number = 1;
+    }
 }
 
 void RoundView::startTurns(int* player_number) {
@@ -35,20 +43,28 @@ void RoundView::startTurns(int* player_number) {
         turnLoop(player_number);
     }
     else {
-        //        controller_->playTurn(player_number);
+        turnLoop(player_number);
     }
 }
 
 void RoundView::turnLoop(int* player_number){
     int tempNum = *player_number;
+    Player* currentPlayer = controller_->getPlayer(*player_number);
     while(tempNum == *player_number) {
-        Command cmd = getCommand();
-        executeCommand(cmd, player_number);
+        if(currentPlayer->isHuman()) {
+            Command cmd = getCommand();
+            executeCommand(cmd, player_number);
+        }
+        else{
+            controller_->playTurn(currentPlayer);
+            plusPlayerNum(player_number);
+        }
     }
 }
 
 void RoundView::startRoundLoop(int* player_number){
     for(int i = 0; i<52; i++){
+        cout<<"Turn "<<i<<endl;
         startTurns(player_number);
     }
 }
@@ -106,13 +122,6 @@ Command RoundView::getCommand(){
     return cmd;
 }
 
-void plusPlayerNum(int* player_number){
-    *player_number = *player_number+1;
-    if(*player_number == 5){
-        *player_number = 1;
-    }
-}
-
 void RoundView::executeCommand(Command cmd,int* player_number){
     Player* currentPlayer = controller_->getPlayer(*player_number);
     switch (cmd.type){
@@ -146,7 +155,6 @@ void RoundView::executeCommand(Command cmd,int* player_number){
         case QUIT:
             cout<<"cmd:quit"<<endl;
             exit(1);
-            break;
         case RAGEQUIT:
             cout<<"cmd:ragequit"<<endl;
             break;

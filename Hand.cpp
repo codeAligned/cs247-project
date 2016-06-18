@@ -33,7 +33,6 @@ void Hand::play(Card c) {
 }
 void Hand::discard(Card c) {
     int loc = findLocation(c,cards_);
-    cout<<loc<<" "<<cards_.size()<<endl;
     discards_.push_back(cards_.at(loc));
     cards_.erase(cards_.begin() + loc);
 }

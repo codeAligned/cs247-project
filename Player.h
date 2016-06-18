@@ -4,6 +4,7 @@
 #include <vector>
 #include "Card.h"
 #include "Hand.h"
+//#include "RoundController.h"
 
 class Player {
 public:
@@ -20,8 +21,9 @@ public:
     void discardCards(Card);
     void playCard(Card);
     void setHand(Hand*);
-    //virtual void playTurn();
-private:
+    //TODO virtual void playTurn(RoundController*);
+//    void playTurn(RoundController*);
+protected:
     std::vector<Card*> filterBySuit(Suit);
     Hand* hand_;
     int gameScore_;

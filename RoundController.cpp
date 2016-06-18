@@ -76,3 +76,8 @@ bool RoundController::isLegalPlay(Player* p, Card c) const{
     }
     return false;
 }
+
+void RoundController::playTurn(Player* player) {
+    ComputerPlayer* playerTemp = static_cast<ComputerPlayer*>(player);
+    playerTemp->playTurn(this);
+}
