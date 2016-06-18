@@ -19,8 +19,8 @@ public:
     // std::vector<Card> getDiamonds();
     // std::vector<Card> getSpades();
     // std::vector<Card> getHearts();
-    // std::vector<Card> calculateLegalPlay(Player);//?
-    // void playCard(Player, Card);
+     std::vector<Card*> calculateLegalPlay(Player*);//?
+     void playCard(Player*, Card);
     // void discardCard(Player, Card);
      Deck* getDeck() const;
     // void quit();

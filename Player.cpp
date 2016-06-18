@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include <iostream>
 using namespace std;
 
 Player::Player() {}
@@ -12,6 +12,10 @@ Player::~Player() {
     delete hand_;
 }
 
+void Player::playCard(Card c){
+    hand_->play(c);
+}
+
 std::vector<Card*> Player::getDiscards() {
     return hand_->getDiscards();
 }
@@ -20,16 +24,16 @@ std::vector<Card*> Player::getCards() {
     return hand_->getCards();
 }
 
-std::vector<Card*> Player::getClubs() {
+vector<Card*> Player::getClubs() {
     return filterBySuit(static_cast<Suit>(0));
 }
-std::vector<Card*> Player::getDiamonds() {
+vector<Card*> Player::getDiamonds() {
     return filterBySuit(static_cast<Suit>(1));
 }
-std::vector<Card*> Player::getHearts() {
+vector<Card*> Player::getHearts() {
     return filterBySuit(static_cast<Suit>(2));
 }
-std::vector<Card*> Player::getSpades() {
+vector<Card*> Player::getSpades() {
     return filterBySuit(static_cast<Suit>(3));
 }
 

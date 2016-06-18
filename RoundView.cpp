@@ -17,19 +17,21 @@ RoundView::~RoundView() {
 }
 
 void RoundView::startTurns(int* player_number) {
-    if (controller_->getPlayer(*player_number)->isHuman()) {
+    Player* currentPlayer = controller_->getPlayer(*player_number);
+    if (currentPlayer->isHuman()) {
         cout << "Cards on the table:" << endl;
         cout << "Clubs: ";
-        printClubs(controller_->getPlayer(*player_number));
+        printClubs(currentPlayer);
         cout << "Diamonds: ";
-        printDiamonds(controller_->getPlayer(*player_number));
+        printDiamonds(currentPlayer);
         cout << "Hearts: ";
-        printHearts(controller_->getPlayer(*player_number));
+        printHearts(currentPlayer);
         cout << "Spades: ";
-        printSpades(controller_->getPlayer(*player_number));
+        printSpades(currentPlayer);
         cout << "Your hand: ";
-        printHand(controller_->getPlayer(*player_number));
-        //         Legal plays: <legal plays in your hand>"
+        printHand(currentPlayer);
+        cout << "Legal plays: ";
+        printLegalPlays(currentPlayer);//<legal plays in your hand>"
         turnLoop(player_number);
     }
     else {
@@ -57,7 +59,7 @@ void printCardList(vector<Card*> list){
     }
     cout<<endl;
 }
-
+//TODO refactor these to use controller instead of directly invoking player
 void RoundView::printClubs(Player* player) {
     vector<Card*> list = player->getClubs();
     printCardList(list);
@@ -82,6 +84,10 @@ void RoundView::printHand(Player* player){
     printCardList(player->getCards());
 }
 
+void RoundView::printLegalPlays(Player* player){
+    printCardList(controller_->calculateLegalPlay(player));
+}
+
 void RoundView::printDeck(){
     Deck* deck = controller_->getDeck();
     for(int i = 0; i<SUIT_COUNT;i++){
@@ -103,6 +109,7 @@ void RoundView::executeCommand(Command cmd,int* player_number){
     switch (cmd.type){
         case PLAY:
             cout<<"cmd:play"<<endl;
+            controller_->playCard(controller_->getPlayer(*player_number),cmd.card);
             *player_number = (*player_number+1)%4;
             break;
         case DISCARD:

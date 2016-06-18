@@ -1,4 +1,5 @@
 #include "Hand.h"
+#include <iostream>
 using namespace std;
 
 Hand::Hand(){
@@ -13,11 +14,24 @@ Hand::~Hand(){
         delete discards_.at(i);
     }
 }
+int findLocation(Card c,vector<Card*> list){
+    for(int i=0;i<list.size();i++){
+        if(list.at(i)->getSuit() == c.getSuit() && list.at(i)->getRank() == c.getRank()){
+            return i;
+        }
+    }
+    throw "Card not found";
+}
 
 Hand::Hand(vector<Card*> h){
     cards_ = h;
 }
-void Hand::play(Card) {}
+void Hand::play(Card c) {
+    cout<<c<<endl;
+    int loc = findLocation(c,cards_);
+    cards_.erase(cards_.begin() + loc);
+
+}
 void Hand::discard(Card) {}
 
 vector<Card*> Hand::getDiscards() {

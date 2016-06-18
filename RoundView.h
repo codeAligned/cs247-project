@@ -19,6 +19,7 @@ private:
     void printHearts(Player*);
     void printSpades(Player*);
     void printHand(Player*);
+    void printLegalPlays(Player*);
     Command getCommand();
     void executeCommand(Command,int*);
     void turnLoop(int*);

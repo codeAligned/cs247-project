@@ -12,6 +12,8 @@ public:
     std::vector<Player*> getPlayers();
     Player* getPlayer(int playerID);
     Deck* getDeck() const;
+    void playCard(Card c);
+    std::vector<Card*> getPlayedCards() const;
 private:
     std::vector<Player*> players_;
     std::vector<Card*> played_cards_;

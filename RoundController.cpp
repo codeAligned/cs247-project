@@ -1,4 +1,6 @@
+#include <cmath>
 #include "RoundController.h"
+
 using namespace std;
 
 RoundController::RoundController(vector<Player*> players) {
@@ -32,4 +34,35 @@ Player* RoundController::getPlayer(int playerID){
 
 Deck* RoundController::getDeck() const{
     return model_->getDeck();
+}
+
+void RoundController::playCard(Player* p, Card c){
+    model_->playCard(c);
+    p->playCard(c);
+}
+
+vector<Card*> RoundController::calculateLegalPlay(Player* p) {
+    vector<Card*> played = model_->getPlayedCards();
+    vector<Card*> hand = p->getCards();
+    vector<Card*> ret = vector<Card*>();
+
+
+    if(model_->getPlayedCards().size() == 0){
+        for( int i=0;i<hand.size();i++ ){
+            if(hand.at(i)->getSuit()== SPADE && hand.at(i)->getRank() == SEVEN){
+                ret.push_back(hand.at(i));
+                return ret;
+            }
+        }
+    }
+
+    for( int i=0;i<hand.size();i++ ){
+        for( int j=0; j<played.size();j++){
+            if(played.at(j)->getSuit()==hand.at(i)->getSuit() && abs(played.at(j)->getRank() - hand.at(i)->getRank())==1 ){
+                ret.push_back(hand.at(i));
+                break;
+            }
+        }
+    }
+    return ret;
 }
