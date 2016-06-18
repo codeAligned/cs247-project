@@ -21,7 +21,7 @@ public:
     // std::vector<Card> getHearts();
      std::vector<Card*> calculateLegalPlay(Player*);//?
      void playCard(Player*, Card);
-    // void discardCard(Player, Card);
+     void discardCard(Player*, Card);
      Deck* getDeck() const;
     // void quit();
     // ComputerPlayer ragequit();

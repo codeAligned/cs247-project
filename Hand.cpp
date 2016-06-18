@@ -27,12 +27,16 @@ Hand::Hand(vector<Card*> h){
     cards_ = h;
 }
 void Hand::play(Card c) {
-    cout<<c<<endl;
     int loc = findLocation(c,cards_);
     cards_.erase(cards_.begin() + loc);
 
 }
-void Hand::discard(Card) {}
+void Hand::discard(Card c) {
+    int loc = findLocation(c,cards_);
+    cout<<loc<<" "<<cards_.size()<<endl;
+    discards_.push_back(cards_.at(loc));
+    cards_.erase(cards_.begin() + loc);
+}
 
 vector<Card*> Hand::getDiscards() {
     return discards_;

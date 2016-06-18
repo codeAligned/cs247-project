@@ -41,6 +41,10 @@ void RoundController::playCard(Player* p, Card c){
     p->playCard(c);
 }
 
+void RoundController::discardCard(Player* p, Card c){
+    p->discardCards(c);
+}
+
 vector<Card*> RoundController::calculateLegalPlay(Player* p) {
     vector<Card*> played = model_->getPlayedCards();
     vector<Card*> hand = p->getCards();

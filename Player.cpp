@@ -16,6 +16,10 @@ void Player::playCard(Card c){
     hand_->play(c);
 }
 
+void Player::discardCards(Card c){
+    hand_->discard(c);
+}
+
 std::vector<Card*> Player::getDiscards() {
     return hand_->getDiscards();
 }

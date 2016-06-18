@@ -105,16 +105,23 @@ Command RoundView::getCommand(){
     return cmd;
 }
 
+void plusPlayerNum(int* player_number){
+    *player_number = *player_number+1;
+    if(*player_number == 5){
+        *player_number = 1;
+    }
+}
+
 void RoundView::executeCommand(Command cmd,int* player_number){
     switch (cmd.type){
         case PLAY:
             cout<<"cmd:play"<<endl;
             controller_->playCard(controller_->getPlayer(*player_number),cmd.card);
-            *player_number = (*player_number+1)%4;
+            plusPlayerNum(player_number);
             break;
         case DISCARD:
             cout<<"cmd:discard"<<endl;
-            *player_number = (*player_number+1)%4;
+            plusPlayerNum(player_number);
             break;
         case DECK:
             cout<<"cmd:deck"<<endl;
