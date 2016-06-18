@@ -56,6 +56,10 @@ void RoundView::turnLoop(int* player_number){
             executeCommand(cmd, player_number);
         }
         else{
+//            cout << "Your hand: ";
+//            printHand(currentPlayer);
+//            cout << "Legal plays: ";
+//            printLegalPlays(currentPlayer);
             controller_->playTurn(currentPlayer);
             plusPlayerNum(player_number);
         }
@@ -64,7 +68,7 @@ void RoundView::turnLoop(int* player_number){
 
 void RoundView::startRoundLoop(int* player_number){
     for(int i = 0; i<52; i++){
-        cout<<"Turn "<<i<<endl;
+//        cout<<"Turn "<<i<<endl;
         startTurns(player_number);
     }
 }

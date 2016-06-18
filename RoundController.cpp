@@ -63,6 +63,10 @@ vector<Card*> RoundController::calculateLegalPlay(Player* p) const{
                 ret.push_back(hand.at(i));
                 break;
             }
+            else if(hand.at(i)->getRank()==SEVEN){
+                ret.push_back(hand.at(i));
+                break;
+            }
         }
     }
     return ret;

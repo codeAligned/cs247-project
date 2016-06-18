@@ -13,11 +13,12 @@ Player::~Player() {
 }
 
 void Player::playCard(Card c){
-    cout<<"playing "<<c<<endl;
+    cout<<"Playing "<<c<<endl;
     hand_->play(c);
 }
 
 void Player::discardCards(Card c){
+    cout<<"Discarding "<<c<<endl;
     hand_->discard(c);
 }
 
