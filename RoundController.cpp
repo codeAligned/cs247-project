@@ -19,9 +19,6 @@ int RoundController::who7Spades() {
             }
         }
     }
-
-    return -1;
-    // implement this
 }
 
 RoundController::~RoundController(){
@@ -45,7 +42,7 @@ void RoundController::discardCard(Player* p, Card c){
     p->discardCards(c);
 }
 
-vector<Card*> RoundController::calculateLegalPlay(Player* p) {
+vector<Card*> RoundController::calculateLegalPlay(Player* p) const{
     vector<Card*> played = model_->getPlayedCards();
     vector<Card*> hand = p->getCards();
     vector<Card*> ret = vector<Card*>();
@@ -69,4 +66,13 @@ vector<Card*> RoundController::calculateLegalPlay(Player* p) {
         }
     }
     return ret;
+}
+
+bool RoundController::isLegalPlay(Player* p, Card c) const{
+    vector<Card*> legal_plays = calculateLegalPlay(p);
+    for (int i = 0; i < legal_plays.size(); i++) {
+        if (c == *(legal_plays.at(i)) )
+            return true;
+    }
+    return false;
 }

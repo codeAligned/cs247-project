@@ -14,12 +14,12 @@ public:
     // void dealCards();
     int who7Spades();
     Player* getPlayer(int);
-    // bool isLegalPlay();
+    bool isLegalPlay(Player*, Card) const;
     // std::vector<Card> getClubs();
     // std::vector<Card> getDiamonds();
     // std::vector<Card> getSpades();
     // std::vector<Card> getHearts();
-     std::vector<Card*> calculateLegalPlay(Player*);//?
+     std::vector<Card*> calculateLegalPlay(Player*) const;//?
      void playCard(Player*, Card);
      void discardCard(Player*, Card);
      Deck* getDeck() const;

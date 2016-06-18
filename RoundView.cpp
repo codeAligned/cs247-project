@@ -101,6 +101,7 @@ void RoundView::printDeck(){
 Command RoundView::getCommand(){
     Command cmd;
     cin.clear();
+    cout << ">";
     cin>>cmd;
     return cmd;
 }
@@ -114,11 +115,19 @@ void plusPlayerNum(int* player_number){
 
 void RoundView::executeCommand(Command cmd,int* player_number){
     switch (cmd.type){
-        case PLAY:
-            cout<<"cmd:play"<<endl;
-            controller_->playCard(controller_->getPlayer(*player_number),cmd.card);
-            plusPlayerNum(player_number);
+        case PLAY: {
+            Player* p = controller_->getPlayer(*player_number);
+
+            if ( controller_->isLegalPlay(p, cmd.card) ) {
+                controller_->playCard(p, cmd.card);
+                plusPlayerNum(player_number);
+            }
+            else {
+                cout << "This is not a legal play." << endl;
+                executeCommand(getCommand(), player_number);
+            }
             break;
+        }
         case DISCARD:
             cout<<"cmd:discard"<<endl;
             plusPlayerNum(player_number);
