@@ -23,7 +23,7 @@ public:
      void playCard(Player*, Card);
      void discardCard(Player*, Card);
      Deck* getDeck() const;
-    void playTurn(Player*);
+    Command playTurn(Player*);
     // void quit();
     // ComputerPlayer ragequit();
 private:

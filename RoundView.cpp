@@ -51,18 +51,14 @@ void RoundView::turnLoop(int* player_number){
     int tempNum = *player_number;
     Player* currentPlayer = controller_->getPlayer(*player_number);
     while(tempNum == *player_number) {
+        Command cmd;
         if(currentPlayer->isHuman()) {
-            Command cmd = getCommand();
-            executeCommand(cmd, player_number);
+            cmd = getCommand();
         }
         else{
-//            cout << "Your hand: ";
-//            printHand(currentPlayer);
-//            cout << "Legal plays: ";
-//            printLegalPlays(currentPlayer);
-            controller_->playTurn(currentPlayer);
-            plusPlayerNum(player_number);
+            cmd = controller_->playTurn(currentPlayer);
         }
+        executeCommand(cmd, player_number);
     }
 }
 
@@ -128,6 +124,7 @@ Command RoundView::getCommand(){
 
 void RoundView::executeCommand(Command cmd,int* player_number){
     Player* currentPlayer = controller_->getPlayer(*player_number);
+    cout<< "Player num: " <<*player_number<<endl;
     switch (cmd.type){
         case PLAY:
             if ( controller_->isLegalPlay(currentPlayer, cmd.card) ) {

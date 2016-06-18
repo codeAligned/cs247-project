@@ -4,6 +4,7 @@
 #include <vector>
 #include "Card.h"
 #include "Hand.h"
+#include "Command.h"
 
 class RoundController;
 
@@ -23,7 +24,7 @@ public:
     void playCard(Card);
     void setHand(Hand*);
     //TODO virtual void playTurn(RoundController*);
-    void playTurn(RoundController*);
+    virtual Command playTurn(RoundController*);
 protected:
     std::vector<Card*> filterBySuit(Suit);
     Hand* hand_;

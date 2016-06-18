@@ -9,8 +9,8 @@ class Player;
 class ComputerPlayer: public Player {
 public:
     ComputerPlayer();
-    // ComputerPlayer(Player);
-    void playTurn(RoundController*);
+//    ComputerPlayer(Player);
+    Command playTurn(RoundController*);
     bool isHuman() const;
 private:
 };
