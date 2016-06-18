@@ -138,6 +138,7 @@ void RoundView::executeCommand(Command cmd,int* player_number){
             break;
         case QUIT:
             cout<<"cmd:quit"<<endl;
+            exit(1);
             break;
         case RAGEQUIT:
             cout<<"cmd:ragequit"<<endl;
