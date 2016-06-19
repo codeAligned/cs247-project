@@ -55,7 +55,7 @@ vector<Card*> Player::filterBySuit(Suit suit){
     return ret;
 }
 
-int Player::getScore() {
+int Player::getScore() const{
     return gameScore_;
 }
 
@@ -69,9 +69,6 @@ void Player::setHand(Hand* hand){
 
 Hand* Player::getHand() const{
     return hand_;
-}
-int Player::getScore() const{
-    return gameScore_;
 }
 
 Command Player::playTurn(RoundController* controller){
