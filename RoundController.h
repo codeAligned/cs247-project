@@ -7,8 +7,7 @@
 #include "ComputerPlayer.h"
 #include "HumanPlayer.h"
 #include "RoundModel.h"
-
-class RoundView;
+#include "RoundView.h"
 
 class RoundController {
 public:

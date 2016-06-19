@@ -3,21 +3,13 @@
 
 using namespace std;
 
-void RoundView::startRound() {
-    int player_number = controller_->who7Spades();
-    cout << "A new round begins. It's player "<< player_number
+RoundView::RoundView(int player_7spades) {
+    cout << "A new round begins. It's player "<< player_7spades
          << "'s turn to play." << endl;
-    startRoundLoop(player_number);
+    // startRoundLoop(player_number);
 }
 
-RoundView::RoundView(vector<Player*> players, int seed) {
-    controller_ = new RoundController(players,seed);
-    startRound();
-}
-
-RoundView::~RoundView() {
-    delete controller_;
-}
+RoundView::~RoundView() {}
 
 void plusPlayerNum(int &player_number){
     player_number = player_number+1;

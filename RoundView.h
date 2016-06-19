@@ -3,17 +3,15 @@
 
 #include <vector>
 #include <iostream>
-#include "RoundController.h"
+#include "Player.h"
 #include "Command.h"
 
 class RoundView {
 public:
-    RoundView(std::vector<Player*>, int seed =0);
-    void startRound();
+    RoundView(int);
     ~RoundView();
     void printDeck();
 private:
-    RoundController* controller_;
     void printClubs();
     void printDiamonds();
     void printHearts();
