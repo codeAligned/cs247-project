@@ -57,6 +57,13 @@ void Player::setHand(Hand* hand){
     hand_ = hand;
 }
 
+Hand* Player::getHand() const{
+    return hand_;
+}
+int Player::getScore() const{
+    return gameScore_;
+}
+
 Command Player::playTurn(RoundController* controller){
     throw "Parent has no specified behaviour";
 }

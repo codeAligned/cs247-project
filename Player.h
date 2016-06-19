@@ -23,6 +23,8 @@ public:
     void discardCards(Card);
     void playCard(Card);
     void setHand(Hand*);
+    Hand* getHand() const;
+    int getScore() const;
     //TODO virtual void playTurn(RoundController*);
     virtual Command playTurn(RoundController*);
 protected:

@@ -25,7 +25,7 @@ public:
      Deck* getDeck() const;
     Command playTurn(Player*);
     // void quit();
-    // ComputerPlayer ragequit();
+    void ragequit(int);
 private:
     RoundModel* model_;
 };

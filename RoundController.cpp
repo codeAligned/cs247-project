@@ -14,7 +14,7 @@ int RoundController::who7Spades() {
     for ( int i=0; i<players.size(); i++ ){
         vector<Card*> tempHand = players.at(i)->getCards();
         for( int j=0; j<tempHand.size() ; j++){
-            if(tempHand.at(j)->getRank() == static_cast<Rank>(6) && tempHand.at(j)->getSuit() == static_cast<Suit>(3)){
+            if(tempHand.at(j)->getRank() == SEVEN && tempHand.at(j)->getSuit() == SPADE){
                 return i+1;
             }
         }
@@ -84,4 +84,10 @@ bool RoundController::isLegalPlay(Player* p, Card c) const{
 Command RoundController::playTurn(Player* player) {
     ComputerPlayer* playerTemp = static_cast<ComputerPlayer*>(player);
     return playerTemp->playTurn(this);
+}
+
+void RoundController::ragequit(int player_number) {
+    Player* p = model_->getPlayer(player_number);
+    ComputerPlayer* newPlayer = new ComputerPlayer(*p);
+    model_->ragequit(player_number, newPlayer);
 }

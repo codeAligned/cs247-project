@@ -5,6 +5,10 @@ using namespace std;
 Hand::Hand(){
 
 }
+Hand::Hand(Hand& hand){
+    cards_ = hand.cards_;
+    discards_ = hand.discards_;
+}
 
 Hand::~Hand(){
 //    for(int i =0;i<cards_.size();i++){

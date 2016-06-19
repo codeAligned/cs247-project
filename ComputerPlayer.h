@@ -9,7 +9,7 @@ class Player;
 class ComputerPlayer: public Player {
 public:
     ComputerPlayer();
-//    ComputerPlayer(Player);
+    ComputerPlayer(Player&);
     Command playTurn(RoundController*);
     bool isHuman() const;
 private:

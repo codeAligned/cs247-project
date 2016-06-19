@@ -49,8 +49,9 @@ void RoundView::startTurns(int* player_number) {
 
 void RoundView::turnLoop(int* player_number){
     int tempNum = *player_number;
-    Player* currentPlayer = controller_->getPlayer(*player_number);
+    Player* currentPlayer;
     while(tempNum == *player_number) {
+        currentPlayer = controller_->getPlayer(*player_number);
         Command cmd;
         if(currentPlayer->isHuman()) {
             cmd = getCommand();
@@ -158,6 +159,7 @@ void RoundView::executeCommand(Command cmd,int* player_number){
             exit(1);
         case RAGEQUIT:
             cout<<"cmd:ragequit"<<endl;
+            controller_->ragequit(*player_number);
             break;
         default:
             throw "Bad Command";

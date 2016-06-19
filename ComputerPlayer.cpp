@@ -9,6 +9,11 @@ ComputerPlayer::ComputerPlayer() {
 
 }
 
+ComputerPlayer::ComputerPlayer(Player& player) {
+    hand_ = new Hand(*player.getHand());
+    gameScore_ = player.getScore();
+}
+
 bool ComputerPlayer::isHuman() const{
     return false;
 }

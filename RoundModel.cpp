@@ -42,3 +42,10 @@ void RoundModel::playCard(Card c) {
 vector<Card*> RoundModel::getPlayedCards() const{
     return played_cards_;
 }
+
+void RoundModel::ragequit(int playerID, Player* newPlayer) {
+    playerID--;
+    Player* temp = players_.at(playerID);
+    players_.at(playerID) = newPlayer;
+    delete temp;
+}
