@@ -1,4 +1,4 @@
-#include <cstdlib>
+ #include <cstdlib>
 #include "RoundView.h"
 
 using namespace std;
@@ -8,24 +8,22 @@ RoundView::RoundView(vector<Player*> players) {
     int player_number = controller_->who7Spades();
     cout << "A new round begins. It's player "<< player_number
          << "'s turn to play" << endl;
-    printDeck();
-
-    startRoundLoop(&player_number);
+    startRoundLoop(player_number);
 }
 
 RoundView::~RoundView() {
     delete controller_;
 }
 
-void plusPlayerNum(int* player_number){
-    *player_number = *player_number+1;
-    if(*player_number == 5){
-        *player_number = 1;
+void plusPlayerNum(int &player_number){
+    player_number = player_number+1;
+    if(player_number == 5){
+        player_number = 1;
     }
 }
 
-void RoundView::startTurns(int* player_number) {
-    Player* currentPlayer = controller_->getPlayer(*player_number);
+void RoundView::startTurns(int &player_number) {
+    Player* currentPlayer = controller_->getPlayer(player_number);
     if (currentPlayer->isHuman()) {
         cout << "Cards on the table:" << endl;
         cout << "Clubs: ";
@@ -47,10 +45,10 @@ void RoundView::startTurns(int* player_number) {
     }
 }
 
-void RoundView::turnLoop(int* player_number){
-    int tempNum = *player_number;
-    Player* currentPlayer = controller_->getPlayer(*player_number);
-    while(tempNum == *player_number) {
+void RoundView::turnLoop(int &player_number){
+    int tempNum = player_number;
+    Player* currentPlayer = controller_->getPlayer(player_number);
+    while(tempNum == player_number) {
         if(currentPlayer->isHuman()) {
             Command cmd = getCommand();
             executeCommand(cmd, player_number);
@@ -66,11 +64,27 @@ void RoundView::turnLoop(int* player_number){
     }
 }
 
-void RoundView::startRoundLoop(int* player_number){
+void RoundView::startRoundLoop(int &player_number){
     for(int i = 0; i<52; i++){
-//        cout<<"Turn "<<i<<endl;
         startTurns(player_number);
     }
+    printScores(player_number);
+}
+
+void RoundView::printScores(int &player_number) {
+    int startingPlayer = player_number;
+    do {
+        Player* currentPlayer = controller_->getPlayer(player_number);
+        cout << "Player " << player_number << "'s discards: ";
+        printDiscards(currentPlayer);
+        int currentScore = currentPlayer->getScore();
+        int roundScore = controller_->roundScore(currentPlayer);
+
+        cout << "Player " << player_number << "'s score: " << currentPlayer->getScore();
+        cout << " + " << controller_->roundScore(currentPlayer) << " = ";
+        cout << currentScore + roundScore << endl;
+        plusPlayerNum(player_number);
+    } while (startingPlayer != player_number);
 }
 
 void printCardList(vector<Card*> list){
@@ -104,6 +118,10 @@ void RoundView::printHand(Player* player){
     printCardList(player->getCards());
 }
 
+void RoundView::printDiscards(Player* player) {
+    printCardList(player->getDiscards());
+}
+
 void RoundView::printLegalPlays(Player* player){
     printCardList(controller_->calculateLegalPlay(player));
 }
@@ -126,13 +144,13 @@ Command RoundView::getCommand(){
     return cmd;
 }
 
-void RoundView::executeCommand(Command cmd,int* player_number){
-    Player* currentPlayer = controller_->getPlayer(*player_number);
+void RoundView::executeCommand(Command cmd, int &player_number){
+    Player* currentPlayer = controller_->getPlayer(player_number);
     switch (cmd.type){
         case PLAY:
             if ( controller_->isLegalPlay(currentPlayer, cmd.card) ) {
                 controller_->playCard(currentPlayer, cmd.card);
-                cout << "Player " << *player_number << " plays " << cmd.card << "." << endl;
+                cout << "Player " << player_number << " plays " << cmd.card << "." << endl;
                 plusPlayerNum(player_number);
             }
             else {
@@ -144,7 +162,7 @@ void RoundView::executeCommand(Command cmd,int* player_number){
             cout<<"cmd:discard"<<endl;
             if (controller_->calculateLegalPlay(currentPlayer).size() == 0) {
                 controller_->discardCard(currentPlayer, cmd.card);
-                cout << "Player " << *player_number << " discards " << cmd.card << "." << endl;
+                cout << "Player " << player_number << " discards " << cmd.card << "." << endl;
                 plusPlayerNum(player_number);
             }
             else {

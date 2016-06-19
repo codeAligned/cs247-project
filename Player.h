@@ -22,6 +22,8 @@ public:
     void discardCards(Card);
     void playCard(Card);
     void setHand(Hand*);
+    void setScore(int);
+    int getScore();
     //TODO virtual void playTurn(RoundController*);
     void playTurn(RoundController*);
 protected:

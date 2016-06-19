@@ -2,9 +2,11 @@
 #include <iostream>
 using namespace std;
 
-Player::Player() {}
+Player::Player() {
+    gameScore_ = 0;
+}
 
-Player::Player(Hand* h) {
+Player::Player(Hand* h) : Player() {
     hand_ = h;
 }
 
@@ -52,6 +54,14 @@ vector<Card*> Player::filterBySuit(Suit suit){
         }
     }
     return ret;
+}
+
+int Player::getScore() {
+    return gameScore_;
+}
+
+void Player::setScore(int score) {
+    gameScore_ = score;
 }
 
 void Player::setHand(Hand* hand){
