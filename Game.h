@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Deck.h"
-#include "RoundView.h"
+#include "RoundController.h"
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
 
@@ -17,7 +17,7 @@ public:
 private:
     void createPlayers();
     static const int NUM_PLAYERS=4;
-    RoundView* round_view_;
+    RoundController* round_controller_;
     std::vector<Player*> players_;
 };
 

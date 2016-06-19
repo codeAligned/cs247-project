@@ -25,6 +25,8 @@ RoundController::~RoundController(){
     delete model_;
 }
 
+void RoundController::startRound(){}
+
 int RoundController::getRoundScore(Player* p) {
     int roundScore = 0;
     vector<Card*> discards = p->getDiscards();

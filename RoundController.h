@@ -11,7 +11,7 @@ class RoundController {
 public:
     RoundController(std::vector<Player*>,int seed = 0);
     ~RoundController();
-    // void dealCards();
+    void startRound();
     int who7Spades();
     Player* getPlayer(int);
     bool isLegalPlay(Player*, Card) const;

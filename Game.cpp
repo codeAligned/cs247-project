@@ -4,14 +4,14 @@ using namespace std;
 
 Game::Game(int seed) {
     createPlayers();
-    round_view_ = nullptr;
+    round_controller_ = nullptr;
     while (!gameOver()) {
-        if (round_view_) {
-            round_view_->newRound();
-            round_view_->startRound();
+        if (round_controller_) {
+            round_controller_->newRound();
+            round_controller_->startRound();
         }
         else {
-            round_view_ = new RoundView(players_, seed);
+            round_controller_ = new RoundController(players_, seed);
         }
     }
     displayWinner();
@@ -38,7 +38,7 @@ Game::~Game() {
     for(int i= 0; i < players_.size(); ++i){
         delete players_.at(i);
     }
-        delete round_view_;
+        delete round_controller_;
 }
 
 //iterate over players, check score over 80 for any. If so, game over.
