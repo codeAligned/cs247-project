@@ -189,7 +189,7 @@ void RoundView::executeCommand(Command cmd, int &player_number){
             printDeck();
             break;
         case QUIT:
-            exit(1);
+            exit(0);
         case RAGEQUIT:
             controller_->ragequit(player_number);
             break;
