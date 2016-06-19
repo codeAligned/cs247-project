@@ -25,7 +25,7 @@ RoundController::~RoundController(){
     delete model_;
 }
 
-int RoundController::roundScore(Player* p) {
+int RoundController::getRoundScore(Player* p) {
     int roundScore = 0;
     vector<Card*> discards = p->getDiscards();
     for (int i = 0; i < discards.size(); i++) {
@@ -34,6 +34,14 @@ int RoundController::roundScore(Player* p) {
     return roundScore;
 }
 
+void RoundController::updatePlayerScores() {
+    vector<Player*> players = model_->getPlayers();
+    for (int i = 0; i < players.size(); ++i) {
+        int current_score = players.at(i)->getScore();
+        int round_score = getRoundScore(players.at(i));
+        players.at(i)->setScore(current_score + round_score);
+    }
+}
 
 Player* RoundController::getPlayer(int playerID){
     return model_->getPlayer(playerID);

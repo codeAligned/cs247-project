@@ -15,7 +15,8 @@ public:
     int who7Spades();
     Player* getPlayer(int);
     bool isLegalPlay(Player*, Card) const;
-    int roundScore(Player*);
+    int getRoundScore(Player*);
+    void updatePlayerScores();
     // std::vector<Card> getClubs();
     // std::vector<Card> getDiamonds();
     // std::vector<Card> getSpades();

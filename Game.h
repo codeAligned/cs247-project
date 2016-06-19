@@ -12,11 +12,12 @@ class Game {
 public:
     Game();
     ~Game();
-    void checkGameOver();
+    void displayWinner();
+    bool gameOver();
 private:
     void createPlayers();
     static const int NUM_PLAYERS=4;
-    RoundView* round_view_;
+    std::vector<RoundView*> round_views_;
     std::vector<Player*> players_;
 };
 

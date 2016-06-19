@@ -4,7 +4,10 @@ using namespace std;
 
 Game::Game() {
     createPlayers();
-    round_view_ = new RoundView(players_);
+    while (!gameOver()) {
+        round_views_.push_back(new RoundView(players_));
+    }
+    displayWinner();
 }
 
 void Game::createPlayers() {
@@ -25,12 +28,32 @@ void Game::createPlayers() {
 }
 
 Game::~Game() {
-    for(int i= 0; i < players_.size(); i++){
+    for(int i= 0; i < players_.size(); ++i){
         delete players_.at(i);
     }
-    delete round_view_;
+    for (int i = 0; i < round_views_.size(); ++i) {
+        delete round_views_.at(i);
+    }
 }
 
-void Game::checkGameOver() {
-    //iterate over players, check score over 80 for any. If so, game over.
+//iterate over players, check score over 80 for any. If so, game over.
+bool Game::gameOver() {
+    for(int i= 0; i < players_.size(); ++i) {
+        if (players_.at(i)->getScore() > 80) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Game::displayWinner() {
+    int winner = 0;
+    int min_score = players_.at(0)->getScore();
+    for (int i = 0; i < players_.size(); ++i) {
+        if (players_.at(i)->getScore() < min_score) {
+            min_score = players_.at(i)->getScore();
+            winner = i;
+        }
+    }
+    cout << "Player " << winner+1 << " wins!" << endl;
 }
