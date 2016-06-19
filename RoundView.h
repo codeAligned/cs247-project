@@ -8,7 +8,7 @@
 
 class RoundView {
 public:
-    RoundView(std::vector<Player*>);
+    RoundView(std::vector<Player*>, int seed =0);
     ~RoundView();
     void printDeck();
     void startTurns(int &);

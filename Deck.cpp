@@ -1,6 +1,9 @@
+#include <random>
 #include "Deck.h"
-#include "shuffle.cpp"
+
 using namespace std;
+
+int seed = 0;
 
 Deck::Deck() {
     for(int i = 0; i < SUIT_COUNT; i++) {
@@ -8,6 +11,15 @@ Deck::Deck() {
             cards_.push_back( new Card( static_cast<Suit>(i), static_cast<Rank>(j) ) );
         }
     }
+}
+
+Deck::Deck(int seedIn) {
+    for(int i = 0; i < SUIT_COUNT; i++) {
+        for(int j = 0; j < RANK_COUNT; j++) {
+            cards_.push_back( new Card( static_cast<Suit>(i), static_cast<Rank>(j) ) );
+        }
+    }
+    seed = seedIn;
 }
 
 Deck::~Deck() {
@@ -36,4 +48,18 @@ vector<Hand*> Deck::dealCards(){
 
 Card* Deck::at(int index){
     return cards_.at(index);
+}
+
+void Deck::shuffle(){
+    static std::mt19937 rng(seed);
+
+    int n = CARD_COUNT;
+
+    while ( n > 1 ) {
+        int k = (int) (rng() % n);
+        --n;
+        Card *c = cards_[n];
+        cards_[n] = cards_[k];
+        cards_[k] = c;
+    }
 }

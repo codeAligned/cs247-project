@@ -10,7 +10,7 @@
 
 class Game {
 public:
-    Game();
+    Game(int seed = 0);
     ~Game();
     void displayWinner();
     bool gameOver();

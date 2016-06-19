@@ -3,8 +3,8 @@
 
 using namespace std;
 
-RoundController::RoundController(vector<Player*> players) {
-    Deck* new_deck = new Deck();
+RoundController::RoundController(vector<Player*> players, int seed) {
+    Deck* new_deck = new Deck(seed);
     new_deck->shuffle();
     model_ = new RoundModel(players, new_deck);
 }

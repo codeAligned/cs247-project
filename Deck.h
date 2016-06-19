@@ -9,6 +9,7 @@
 class Deck {
 public:
     Deck();
+    Deck(int);
     ~Deck();
     void shuffle();
     friend std::ostream& operator<<(std::ostream&, const Deck &);
@@ -16,6 +17,7 @@ public:
     Card* at(int);
 private:
     std::vector<Card*> cards_;
+    const int CARD_COUNT = 52;
 };
 
 #endif

@@ -2,14 +2,14 @@
 
 using namespace std;
 
-Game::Game() {
+Game::Game(int seed) {
     createPlayers();
     round_view_ = nullptr;
     while (!gameOver()) {
         if (round_view_) {
             delete round_view_;
         }
-        round_view_ = new RoundView(players_);
+        round_view_ = new RoundView(players_,seed);
     }
     displayWinner();
 }
