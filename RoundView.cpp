@@ -6,7 +6,7 @@ using namespace std;
 void RoundView::startRound() {
     int player_number = controller_->who7Spades();
     cout << "A new round begins. It's player "<< player_number
-         << "'s turn to play" << endl;
+         << "'s turn to play." << endl;
     startRoundLoop(player_number);
 }
 
@@ -16,8 +16,6 @@ RoundView::RoundView(vector<Player*> players, int seed) {
 }
 
 RoundView::RoundView(vector<Player*> players, Deck* previous_deck, int seed ) {
-    cout << "Previous deck is ";
-    printDeck();
     controller_ = new RoundController(players, previous_deck, seed);
     startRound();
 }

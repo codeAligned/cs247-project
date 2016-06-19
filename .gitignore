@@ -3,4 +3,5 @@ CMakeLists.txt
 *.o
 *.d
 *.dSYM/
+./straights
 main

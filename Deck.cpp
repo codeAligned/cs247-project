@@ -37,17 +37,12 @@ ostream& operator<<(ostream& os, const Deck &d) {
 vector<Hand*> Deck::dealCards(){
     vector<Hand*> hands = vector<Hand*>();
     for( int i=0;i<4;i++){
-        cout << "I is " << i << endl;
         vector<Card*> temp = vector<Card*>();
         for(int j=0;j<13;j++){
-            cout << "J is " << j << endl;
-            cout << "Card is " << *(cards_.at(13*i+j)) << endl;
             temp.push_back(cards_.at(13*i+j));
         }
-        cout << "done inner loop" << endl;
         hands.push_back(new Hand(temp));
     }
-    cout << "done outer loop" << endl;
     return hands;
 }
 
