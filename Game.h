@@ -2,11 +2,8 @@
 #define _GAME_
 
 #include <iostream>
-#include "Player.h"
 #include "Deck.h"
 #include "RoundController.h"
-#include "HumanPlayer.h"
-#include "ComputerPlayer.h"
 
 class Game {
 public:
