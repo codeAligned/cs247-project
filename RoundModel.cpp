@@ -1,8 +1,8 @@
 #include "RoundModel.h"
 using namespace std;
+
 RoundModel::RoundModel(std::vector<Player*> players, Deck* new_deck) {
     deck_ = new_deck;
-
     vector<Hand*> hands = new_deck->dealCards();
     for(int i=0;i<hands.size();i++){
         players.at(i)->setHand(hands.at(i));

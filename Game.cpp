@@ -7,9 +7,14 @@ Game::Game(int seed) {
     round_view_ = nullptr;
     while (!gameOver()) {
         if (round_view_) {
+            Deck* previous_round_deck = round_view_->getRoundDeck();
+            round_view_->printDeck();
             delete round_view_;
+            round_view_ = new RoundView(players_, previous_round_deck, seed);
         }
-        round_view_ = new RoundView(players_,seed);
+        else {
+            round_view_ = new RoundView(players_, seed);
+        }
     }
     displayWinner();
 }

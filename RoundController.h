@@ -10,6 +10,7 @@
 class RoundController {
 public:
     RoundController(std::vector<Player*>,int seed = 0);
+    RoundController(std::vector<Player*>,Deck*,int seed = 0);
     ~RoundController();
     // void dealCards();
     int who7Spades();

@@ -1,14 +1,25 @@
- #include <cstdlib>
+#include <cstdlib>
 #include "RoundView.h"
 
 using namespace std;
 
-RoundView::RoundView(vector<Player*> players, int seed) {
-    controller_ = new RoundController(players,seed);
+void RoundView::startRound() {
     int player_number = controller_->who7Spades();
     cout << "A new round begins. It's player "<< player_number
          << "'s turn to play" << endl;
     startRoundLoop(player_number);
+}
+
+RoundView::RoundView(vector<Player*> players, int seed) {
+    controller_ = new RoundController(players,seed);
+    startRound();
+}
+
+RoundView::RoundView(vector<Player*> players, Deck* previous_deck, int seed ) {
+    cout << "Previous deck is ";
+    printDeck();
+    controller_ = new RoundController(players, previous_deck, seed);
+    startRound();
 }
 
 RoundView::~RoundView() {
@@ -140,6 +151,10 @@ Command RoundView::getCommand(){
     cout << ">";
     cin>>cmd;
     return cmd;
+}
+
+Deck* RoundView::getRoundDeck() {
+    controller_->getDeck();
 }
 
 void RoundView::executeCommand(Command cmd, int &player_number){
