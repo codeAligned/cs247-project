@@ -17,7 +17,7 @@ public:
 private:
     void createPlayers();
     static const int NUM_PLAYERS=4;
-    std::vector<RoundView*> round_views_;
+    RoundView* round_view_;
     std::vector<Player*> players_;
 };
 

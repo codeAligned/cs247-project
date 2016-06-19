@@ -71,6 +71,10 @@ Hand* Player::getHand() const{
     return hand_;
 }
 
+void Player::deleteHand() {
+    delete hand_;
+}
+
 Command Player::playTurn(RoundController* controller){
     throw "Parent has no specified behaviour";
 }

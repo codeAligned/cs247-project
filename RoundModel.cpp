@@ -4,7 +4,6 @@ RoundModel::RoundModel(std::vector<Player*> players, Deck* new_deck) {
     deck_ = new_deck;
 
     vector<Hand*> hands = new_deck->dealCards();
-//    cout<<hands.size();
     for(int i=0;i<hands.size();i++){
         players.at(i)->setHand(hands.at(i));
     }
@@ -13,9 +12,10 @@ RoundModel::RoundModel(std::vector<Player*> players, Deck* new_deck) {
 
 RoundModel::~RoundModel() {
     delete deck_;
-    // for(int i= 0; i < players_.size(); i++){
-    //     delete players_.at(i);
-    // }
+    // Game will delete players, but round needs to delete the hand.
+    for (int i = 0; i < players_.size(); ++i) {
+        players_.at(i)->deleteHand();
+    }
     for(int i= 0; i < played_cards_.size(); i++){
         delete played_cards_.at(i);
     }

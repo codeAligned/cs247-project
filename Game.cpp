@@ -5,7 +5,10 @@ using namespace std;
 Game::Game() {
     createPlayers();
     while (!gameOver()) {
-        round_views_.push_back(new RoundView(players_));
+        if (round_view_) {
+            delete round_view_;
+        }
+        round_view_ = new RoundView(players_);
     }
     displayWinner();
 }
@@ -31,9 +34,7 @@ Game::~Game() {
     for(int i= 0; i < players_.size(); ++i){
         delete players_.at(i);
     }
-    for (int i = 0; i < round_views_.size(); ++i) {
-        delete round_views_.at(i);
-    }
+        delete round_view_;
 }
 
 //iterate over players, check score over 80 for any. If so, game over.

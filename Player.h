@@ -14,6 +14,7 @@ public:
     Player(Hand*);
    ~Player();
     virtual bool isHuman() const = 0;
+    void deleteHand();
     std::vector<Card*> getDiscards();
     std::vector<Card*> getCards();
     std::vector<Card*> getClubs();
