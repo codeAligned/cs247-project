@@ -18,19 +18,19 @@ public:
     bool isLegalPlay(Player*, Card) const;
     int getRoundScore(Player*);
     void updatePlayerScores();
-    // std::vector<Card> getClubs();
-    // std::vector<Card> getDiamonds();
-    // std::vector<Card> getSpades();
-    // std::vector<Card> getHearts();
+    std::vector<Card*> getClubs();
+    std::vector<Card*> getDiamonds();
+    std::vector<Card*> getSpades();
+    std::vector<Card*> getHearts();
     void newRound();
-     std::vector<Card*> calculateLegalPlay(Player*) const;
-     void playCard(Player*, Card);
-     void discardCard(Player*, Card);
-     Deck* getDeck() const;
+    std::vector<Card*> calculateLegalPlay(Player*) const;
+    void playCard(Player*, Card);
+    void discardCard(Player*, Card);
+    Deck* getDeck() const;
     Command playTurn(Player*);
-    // void quit();
     void ragequit(int);
 private:
+    std::vector<Card*> filterBySuit(Suit);
     RoundModel* model_;
 };
 

@@ -104,6 +104,30 @@ bool RoundController::isLegalPlay(Player* p, Card c) const{
     return false;
 }
 
+vector<Card*> RoundController::getClubs() {
+    return filterBySuit(static_cast<Suit>(0));
+}
+vector<Card*> RoundController::getDiamonds() {
+    return filterBySuit(static_cast<Suit>(1));
+}
+vector<Card*> RoundController::getHearts() {
+    return filterBySuit(static_cast<Suit>(2));
+}
+vector<Card*> RoundController::getSpades() {
+    return filterBySuit(static_cast<Suit>(3));
+}
+
+vector<Card*> RoundController::filterBySuit(Suit suit){
+    vector<Card*> temp = model_->getPlayedCards();
+    vector<Card*> ret = vector<Card*>();
+    for(int i = 0; i<temp.size(); i++ ){
+        if(temp.at(i)->getSuit() == suit){
+            ret.push_back(temp.at(i));
+        }
+    }
+    return ret;
+}
+
 Command RoundController::playTurn(Player* player) {
     ComputerPlayer* playerTemp = static_cast<ComputerPlayer*>(player);
     return playerTemp->playTurn(this);

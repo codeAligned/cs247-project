@@ -36,13 +36,13 @@ void RoundView::startTurns(int &player_number) {
     if (currentPlayer->isHuman()) {
         cout << "Cards on the table:" << endl;
         cout << "Clubs: ";
-        printClubs(currentPlayer);
+        printClubs();
         cout << "Diamonds: ";
-        printDiamonds(currentPlayer);
+        printDiamonds();
         cout << "Hearts: ";
-        printHearts(currentPlayer);
+        printHearts();
         cout << "Spades: ";
-        printSpades(currentPlayer);
+        printSpades();
         cout << "Your hand: ";
         printHand(currentPlayer);
         cout << "Legal plays: ";
@@ -100,25 +100,32 @@ void printCardList(vector<Card*> list){
     }
     cout<<endl;
 }
-//TODO refactor these to use controller instead of directly invoking player
-void RoundView::printClubs(Player* player) {
-    vector<Card*> list = player->getClubs();
-    printCardList(list);
+
+void printCardRank(vector<Card*> list){
+    for( int i = 0; i<list.size(); i++ ){
+        cout<<list.at(i)->getRank()+1<<" ";
+    }
+    cout<<endl;
 }
 
-void RoundView::printDiamonds(Player* player) {
-    vector<Card*> list = player->getDiamonds();
-    printCardList(list);
+void RoundView::printClubs() {
+    vector<Card*> played_clubs = controller_->getClubs();
+    printCardRank(played_clubs);
 }
 
-void RoundView::printHearts(Player* player) {
-    vector<Card*> list = player->getHearts();
-    printCardList(list);
+void RoundView::printDiamonds() {
+    vector<Card*> played_diamonds = controller_->getDiamonds();
+    printCardRank(played_diamonds);
 }
 
-void RoundView::printSpades(Player* player) {
-    vector<Card*> list = player->getSpades();
-    printCardList(list);
+void RoundView::printHearts() {
+    vector<Card*> played_hearts = controller_->getHearts();
+    printCardRank(played_hearts);
+}
+
+void RoundView::printSpades() {
+    vector<Card*> played_spades = controller_->getSpades();
+    printCardRank(played_spades);
 }
 
 void RoundView::printHand(Player* player){

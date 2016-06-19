@@ -30,30 +30,6 @@ vector<Card*> Player::getCards() {
     return hand_->getCards();
 }
 
-vector<Card*> Player::getClubs() {
-    return filterBySuit(static_cast<Suit>(0));
-}
-vector<Card*> Player::getDiamonds() {
-    return filterBySuit(static_cast<Suit>(1));
-}
-vector<Card*> Player::getHearts() {
-    return filterBySuit(static_cast<Suit>(2));
-}
-vector<Card*> Player::getSpades() {
-    return filterBySuit(static_cast<Suit>(3));
-}
-
-vector<Card*> Player::filterBySuit(Suit suit){
-    vector<Card*> temp = hand_->getCards();
-    vector<Card*> ret = vector<Card*>();
-    for(int i = 0; i<temp.size(); i++ ){
-        if(temp.at(i)->getSuit() == suit){
-            ret.push_back(temp.at(i));
-        }
-    }
-    return ret;
-}
-
 int Player::getScore() const{
     return gameScore_;
 }

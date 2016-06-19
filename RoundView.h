@@ -17,10 +17,10 @@ public:
     Deck* getRoundDeck();
 private:
     RoundController* controller_;
-    void printClubs(Player*);
-    void printDiamonds(Player*);
-    void printHearts(Player*);
-    void printSpades(Player*);
+    void printClubs();
+    void printDiamonds();
+    void printHearts();
+    void printSpades();
     void printDiscards(Player*);
     void printScores(int &);
     void printHand(Player*);

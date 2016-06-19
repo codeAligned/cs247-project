@@ -17,10 +17,6 @@ public:
     void deleteHand();
     std::vector<Card*> getDiscards();
     std::vector<Card*> getCards();
-    std::vector<Card*> getClubs();
-    std::vector<Card*> getDiamonds();
-    std::vector<Card*> getHearts();
-    std::vector<Card*> getSpades();
     void discardCards(Card);
     void playCard(Card);
     void setHand(Hand*);
@@ -30,7 +26,6 @@ public:
     //TODO virtual void playTurn(RoundController*);
     virtual Command playTurn(RoundController*);
 protected:
-    std::vector<Card*> filterBySuit(Suit);
     Hand* hand_;
     int gameScore_;
 };
