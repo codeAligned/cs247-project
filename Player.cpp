@@ -19,7 +19,6 @@ void Player::playCard(Card c){
 }
 
 void Player::discardCards(Card c){
-    cout<<"Discarding "<<c<<endl;
     hand_->discard(c);
 }
 
