@@ -22,7 +22,7 @@ private:
     void printHearts();
     void printSpades();
     void printDiscards(Player*);
-    void printScores(int &);
+    void printScores();
     void printHand(Player*);
     void printLegalPlays(Player*);
     Command getCommand();

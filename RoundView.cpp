@@ -74,13 +74,12 @@ void RoundView::startRoundLoop(int &player_number){
     for(int i = 0; i<52; i++){
         startTurns(player_number);
     }
-    printScores(player_number);
+    printScores();
     controller_->updatePlayerScores();
 }
 
-void RoundView::printScores(int &player_number) {
-    int starting_player = player_number;
-    do {
+void RoundView::printScores() {
+    for (int player_number = 1; player_number <= 4; ++player_number) {
         Player* current_player = controller_->getPlayer(player_number);
         cout << "Player " << player_number << "'s discards: ";
         printDiscards(current_player);
@@ -90,8 +89,7 @@ void RoundView::printScores(int &player_number) {
         cout << "Player " << player_number << "'s score: " << current_player->getScore();
         cout << " + " << controller_->getRoundScore(current_player) << " = ";
         cout << current_score + round_score << endl;
-        plusPlayerNum(player_number);
-    } while (starting_player != player_number);
+    }
 }
 
 void printCardList(vector<Card*> list){
