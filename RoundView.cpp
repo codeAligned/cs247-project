@@ -194,3 +194,7 @@ void RoundView::executeCommand(Command cmd, int &player_number){
             throw "Bad Command";
     }
 }
+
+void RoundView::newRound(){
+    controller_->newRound();
+}

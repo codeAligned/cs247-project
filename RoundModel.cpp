@@ -49,3 +49,19 @@ void RoundModel::ragequit(int playerID, Player* newPlayer) {
     players_.at(playerID) = newPlayer;
     delete temp;
 }
+
+void RoundModel::newRound() {
+    for(int i= 0; i < played_cards_.size(); i++){
+        delete played_cards_.at(i);
+    }
+    played_cards_ = vector<Card*>();
+
+    deck_->shuffle();
+    vector<Hand*> hands = deck_->dealCards();
+    for(int i=0;i<hands.size();i++){
+        players_.at(i)->deleteHand();
+        players_.at(i)->setHand(hands.at(i));
+    }
+
+
+}

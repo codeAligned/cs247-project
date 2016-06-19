@@ -114,3 +114,7 @@ void RoundController::ragequit(int player_number) {
     ComputerPlayer* newPlayer = new ComputerPlayer(*p);
     model_->ragequit(player_number, newPlayer);
 }
+
+void RoundController::newRound() {
+    model_->newRound();
+}

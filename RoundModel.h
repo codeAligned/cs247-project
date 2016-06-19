@@ -15,6 +15,7 @@ public:
     void playCard(Card c);
     std::vector<Card*> getPlayedCards() const;
     void ragequit(int, Player*);
+    void newRound();
 private:
     std::vector<Player*> players_;
     std::vector<Card*> played_cards_;
