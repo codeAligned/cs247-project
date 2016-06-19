@@ -151,10 +151,6 @@ Command RoundView::getCommand(){
     return cmd;
 }
 
-Deck* RoundView::getRoundDeck() {
-    controller_->getDeck();
-}
-
 void RoundView::executeCommand(Command cmd, int &player_number){
     Player* currentPlayer = controller_->getPlayer(player_number);
     switch (cmd.type){
@@ -191,8 +187,4 @@ void RoundView::executeCommand(Command cmd, int &player_number){
         default:
             throw "Bad Command";
     }
-}
-
-void RoundView::newRound(){
-    controller_->newRound();
 }

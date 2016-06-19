@@ -12,8 +12,6 @@ public:
     void startRound();
     ~RoundView();
     void printDeck();
-    void newRound();
-    Deck* getRoundDeck();
 private:
     RoundController* controller_;
     void printClubs();
