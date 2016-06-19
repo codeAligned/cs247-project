@@ -14,7 +14,7 @@ int RoundController::who7Spades() {
     for ( int i=0; i<players.size(); i++ ){
         vector<Card*> tempHand = players.at(i)->getCards();
         for( int j=0; j<tempHand.size() ; j++){
-            if(tempHand.at(j)->getRank() == static_cast<Rank>(6) && tempHand.at(j)->getSuit() == static_cast<Suit>(3)){
+            if(tempHand.at(j)->getRank() == SEVEN && tempHand.at(j)->getSuit() == SPADE){
                 return i+1;
             }
         }
@@ -69,7 +69,7 @@ vector<Card*> RoundController::calculateLegalPlay(Player* p) const{
 
     for( int i=0;i<hand.size();i++ ){
         for( int j=0; j<played.size();j++){
-            if(played.at(j)->getSuit()==hand.at(i)->getSuit() && abs(played.at(j)->getRank() - hand.at(i)->getRank())==1 ){
+            if(played.at(j)->getSuit()==hand.at(i)->getSuit() && abs(played.at(j)->getRank() - hand.at(i)->getRank())<=1 ){
                 ret.push_back(hand.at(i));
                 break;
             }
@@ -91,7 +91,13 @@ bool RoundController::isLegalPlay(Player* p, Card c) const{
     return false;
 }
 
-void RoundController::playTurn(Player* player) {
+Command RoundController::playTurn(Player* player) {
     ComputerPlayer* playerTemp = static_cast<ComputerPlayer*>(player);
-    playerTemp->playTurn(this);
+    return playerTemp->playTurn(this);
+}
+
+void RoundController::ragequit(int player_number) {
+    Player* p = model_->getPlayer(player_number);
+    ComputerPlayer* newPlayer = new ComputerPlayer(*p);
+    model_->ragequit(player_number, newPlayer);
 }

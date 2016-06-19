@@ -14,6 +14,7 @@ public:
     Deck* getDeck() const;
     void playCard(Card c);
     std::vector<Card*> getPlayedCards() const;
+    void ragequit(int, Player*);
 private:
     std::vector<Player*> players_;
     std::vector<Card*> played_cards_;

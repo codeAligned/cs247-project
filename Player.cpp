@@ -15,7 +15,6 @@ Player::~Player() {
 }
 
 void Player::playCard(Card c){
-    cout<<"Playing "<<c<<endl;
     hand_->play(c);
 }
 
@@ -68,6 +67,13 @@ void Player::setHand(Hand* hand){
     hand_ = hand;
 }
 
-void Player::playTurn(RoundController* controller){
+Hand* Player::getHand() const{
+    return hand_;
+}
+int Player::getScore() const{
+    return gameScore_;
+}
+
+Command Player::playTurn(RoundController* controller){
     throw "Parent has no specified behaviour";
 }
