@@ -7,6 +7,8 @@
 #include "ComputerPlayer.h"
 #include "RoundModel.h"
 
+class RoundView;
+
 class RoundController {
 public:
     RoundController(std::vector<Player*>,int seed = 0);
@@ -31,6 +33,7 @@ public:
 private:
     std::vector<Card*> filterBySuit(Suit);
     RoundModel* model_;
+    RoundView* view_;
 };
 
 #endif
