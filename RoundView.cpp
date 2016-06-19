@@ -156,7 +156,6 @@ void RoundView::executeCommand(Command cmd, int &player_number){
             }
             break;
         case DISCARD:
-            cout<<"cmd:discard"<<endl;
             if (controller_->calculateLegalPlay(currentPlayer).size() == 0) {
                 controller_->discardCard(currentPlayer, cmd.card);
                 cout << "Player " << player_number << " discards " << cmd.card << "." << endl;
@@ -168,14 +167,11 @@ void RoundView::executeCommand(Command cmd, int &player_number){
             }
             break;
         case DECK:
-            cout<<"cmd:deck"<<endl;
             printDeck();
             break;
         case QUIT:
-            cout<<"cmd:quit"<<endl;
             exit(1);
         case RAGEQUIT:
-            cout<<"cmd:ragequit"<<endl;
             controller_->ragequit(player_number);
             break;
         default:
