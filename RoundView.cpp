@@ -15,11 +15,6 @@ RoundView::RoundView(vector<Player*> players, int seed) {
     startRound();
 }
 
-RoundView::RoundView(vector<Player*> players, Deck* previous_deck, int seed ) {
-    controller_ = new RoundController(players, previous_deck, seed);
-    startRound();
-}
-
 RoundView::~RoundView() {
     delete controller_;
 }
