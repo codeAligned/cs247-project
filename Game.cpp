@@ -4,6 +4,7 @@ using namespace std;
 
 Game::Game() {
     createPlayers();
+    round_view_ = nullptr;
     while (!gameOver()) {
         if (round_view_) {
             delete round_view_;
