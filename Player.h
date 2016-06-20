@@ -24,7 +24,6 @@ public:
     void setScore(int);
     Hand* getHand() const;
     int getScore() const;
-    //TODO virtual void playTurn(RoundController*);
     virtual Command playTurn(RoundController*);
 protected:
     Hand* hand_;

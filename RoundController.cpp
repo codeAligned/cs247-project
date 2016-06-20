@@ -222,3 +222,7 @@ void RoundController::newRound() {
     model_->newRound();
     view_->printNewRound(who7Spades());
 }
+
+vector<Player*> RoundController::getPlayers() const{
+    return model_->getPlayers();
+}

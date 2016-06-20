@@ -45,6 +45,9 @@ Game::~Game() {
 
 //iterate over players, check score over 80 for any. If so, game over.
 bool Game::gameOver() {
+    if(round_controller_) {
+        players_ = round_controller_->getPlayers();
+    }
     for(int i= 0; i < players_.size(); ++i) {
         if (players_.at(i)->getScore() > 80) {
             return true;

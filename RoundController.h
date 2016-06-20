@@ -18,6 +18,7 @@ public:
     void startRound(int &);
     void newRound();
     std::vector<Card*> calculateLegalPlay(Player*) const;
+    std::vector<Player*> getPlayers() const;
 private:
     void playCard(Player*, Card);
     void discardCard(Player*, Card);
