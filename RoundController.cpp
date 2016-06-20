@@ -11,11 +11,12 @@ RoundController::RoundController(vector<Player*> players, int seed) {
     startRound(player_7spades);
 }
 
+// Loop through each player's hand and check if they have 7 Spades
 int RoundController::who7Spades() const{
     vector<Player*> players = model_->getPlayers();
-    for ( int i=0; i<players.size(); i++ ){
+    for ( int i = 0; i < players.size(); ++i ) {
         vector<Card*> tempHand = players.at(i)->getCards();
-        for( int j=0; j<tempHand.size() ; j++){
+        for( int j = 0; j < tempHand.size(); ++j) {
             if(tempHand.at(j)->getRank() == SEVEN && tempHand.at(j)->getSuit() == SPADE){
                 return i+1;
             }
@@ -30,7 +31,7 @@ RoundController::~RoundController() {
 }
 
 void RoundController::startRound(int &player_number) {
-    for(int i = 0; i<52; i++){
+    for(int i = 0; i < 52; ++i) {
         startTurns(player_number);
     }
     updatePlayerScores();
@@ -109,7 +110,7 @@ void RoundController::executeCommand(Command cmd, int &player_number) {
 int RoundController::getRoundScore(Player* p) const {
     int roundScore = 0;
     vector<Card*> discards = p->getDiscards();
-    for (int i = 0; i < discards.size(); i++) {
+    for (int i = 0; i < discards.size(); ++i) {
         roundScore += discards.at(i)->getRank()+1;
     }
     return roundScore;
@@ -139,14 +140,15 @@ void RoundController::discardCard(Player* p, Card c){
     p->discardCard(c);
 }
 
+// Returns vector of legal plays for a player
 vector<Card*> RoundController::calculateLegalPlay(Player* p) const{
     vector<Card*> played = model_->getPlayedCards();
     vector<Card*> hand = p->getCards();
     vector<Card*> ret = vector<Card*>();
 
-
+    // If first turn, only legal play is 7 spades
     if(model_->getPlayedCards().size() == 0){
-        for( int i=0;i<hand.size();i++ ){
+        for( int i = 0; i < hand.size(); ++i ){
             if(hand.at(i)->getSuit()== SPADE && hand.at(i)->getRank() == SEVEN){
                 ret.push_back(hand.at(i));
                 return ret;
@@ -154,8 +156,10 @@ vector<Card*> RoundController::calculateLegalPlay(Player* p) const{
         }
     }
 
-    for( int i=0;i<hand.size();i++ ){
-        for( int j=0; j<played.size();j++){
+    // Check player's hand and round's played cards for legal plays
+    for(int i = 0; i < hand.size(); ++i ) {
+
+        for(int j = 0; j < played.size(); ++j) {
             if(played.at(j)->getSuit()==hand.at(i)->getSuit() && abs(played.at(j)->getRank() - hand.at(i)->getRank())<=1 ){
                 ret.push_back(hand.at(i));
                 break;
@@ -165,13 +169,14 @@ vector<Card*> RoundController::calculateLegalPlay(Player* p) const{
                 break;
             }
         }
+
     }
     return ret;
 }
 
 bool RoundController::isLegalPlay(Player* p, Card c) const{
     vector<Card*> legal_plays = calculateLegalPlay(p);
-    for (int i = 0; i < legal_plays.size(); i++) {
+    for (int i = 0; i < legal_plays.size(); ++i) {
         if (c == *(legal_plays.at(i)) )
             return true;
     }
@@ -194,7 +199,7 @@ vector<Card*> RoundController::getSpades() const {
 vector<Card*> RoundController::filterBySuit(Suit suit) const {
     vector<Card*> temp = model_->getPlayedCards();
     vector<Card*> ret = vector<Card*>();
-    for(int i = 0; i<temp.size(); i++ ){
+    for(int i = 0; i < temp.size(); ++i ){
         if(temp.at(i)->getSuit() == suit){
             ret.push_back(temp.at(i));
         }

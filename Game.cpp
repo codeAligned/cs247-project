@@ -20,7 +20,7 @@ Game::Game(int seed) {
 }
 
 void Game::createPlayers() {
-    for (int i = 1; i <= NUM_PLAYERS; i++) {
+    for (int i = 1; i <= NUM_PLAYERS; ++i) {
         char playerType;
         cout << "Is player " << i << " a human(h) or a computer(c)?" << endl << ">";
         cin >> playerType;
@@ -40,7 +40,7 @@ Game::~Game() {
     for(int i= 0; i < players_.size(); ++i){
         delete players_.at(i);
     }
-        delete round_controller_;
+    delete round_controller_;
 }
 
 //iterate over players, check score over 80 for any. If so, game over.

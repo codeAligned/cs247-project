@@ -7,16 +7,16 @@ using namespace std;
 int seed = 0;
 
 Deck::Deck() {
-    for(int i = 0; i < SUIT_COUNT; i++) {
-        for(int j = 0; j < RANK_COUNT; j++) {
+    for(int i = 0; i < SUIT_COUNT; ++i) {
+        for(int j = 0; j < RANK_COUNT; ++j) {
             cards_.push_back( new Card( static_cast<Suit>(i), static_cast<Rank>(j) ) );
         }
     }
 }
 
 Deck::Deck(int seedIn) {
-    for(int i = 0; i < SUIT_COUNT; i++) {
-        for(int j = 0; j < RANK_COUNT; j++) {
+    for(int i = 0; i < SUIT_COUNT; ++i) {
+        for(int j = 0; j < RANK_COUNT; ++j) {
             cards_.push_back( new Card( static_cast<Suit>(i), static_cast<Rank>(j) ) );
         }
     }
@@ -24,7 +24,7 @@ Deck::Deck(int seedIn) {
 }
 
 Deck::~Deck() {
-    for(int i = 0; i < cards_.size(); i++) {
+    for(int i = 0; i < cards_.size(); ++i) {
         delete cards_.at(i);
     }
 }
@@ -32,10 +32,10 @@ Deck::~Deck() {
 // Return vector of 4 hands with 13 cards each.
 vector<Hand*> Deck::dealCards(){
     vector<Hand*> hands = vector<Hand*>();
-    for( int i=0;i<4;i++){
+    for(int i = 0; i < 4; ++i) {
         vector<Card*> temp = vector<Card*>();
-        for(int j=0;j<13;j++){
-            temp.push_back(cards_.at(13*i+j));
+        for(int j = 0; j < 13; ++j) {
+            temp.push_back( cards_.at(13*i+j) ); // calculate index of card from 0..51
         }
         hands.push_back(new Hand(temp));
     }

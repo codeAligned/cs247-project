@@ -17,9 +17,10 @@ bool ComputerPlayer::isHuman() const{
 Command ComputerPlayer::playTurn(RoundController* controller) {
     vector<Card*> legalPlays = controller->calculateLegalPlay(this);
     vector<Card*> hand = hand_->getCards();
-    //If we have a play, play it
-    for(int i=0;i<hand.size();i++){
-        for(int j=0;j<legalPlays.size();j++){
+
+    // Check hand for legal plays. If found, play it.
+    for(int i = 0; i < hand.size(); ++i) {
+        for(int j = 0; j < legalPlays.size(); ++j) {
             if(*hand.at(i) == *legalPlays.at(j)){
                 Command cmd = Command();
                 cmd.card = *hand.at(i);

@@ -36,26 +36,26 @@ void RoundView::printPlayerScore(vector<Card*> discards, int current_score, int 
 
 // Print cards' ranks and suits
 void RoundView::printCardList(vector<Card*> list){
-    for( int i = 0; i<list.size(); i++ ){
-        cout<<*list.at(i)<<" ";
+    for( int i = 0; i < list.size(); ++i ){
+        cout << *list.at(i) << " ";
     }
-    cout<<endl;
+    cout << endl;
 }
 
 // Print only cards' ranks (for cards on table)
 void RoundView::printCardRank(vector<Card*> list){
-    for( int i = 0; i<list.size(); i++ ){
-        cout<<list.at(i)->getRank()+1<<" ";
+    for(int i = 0; i<list.size(); ++i ) {
+        cout << list.at(i)->getRank()+1 << " ";
     }
-    cout<<endl;
+    cout << endl;
 }
 
 void RoundView::printDeck(Deck* deck){
-    for(int i = 0; i < SUIT_COUNT; i++){
-        for(int j = 0; j < RANK_COUNT; j++){
-            cout << *deck->at(13*i+j) << " ";
+    for(int suit_index = 0; suit_index < SUIT_COUNT; ++suit_index) {
+        for(int rank_index = 0; rank_index < RANK_COUNT; ++rank_index) {
+            cout << * (deck->at( 13*suit_index + rank_index )) << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
 }
 
