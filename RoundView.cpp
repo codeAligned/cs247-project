@@ -1,132 +1,53 @@
-#include <cstdlib>
 #include "RoundView.h"
 
 using namespace std;
 
 RoundView::RoundView(int player_7spades) {
+    printNewRound(player_7spades);
+}
+
+void RoundView::printNewRound(int player_7spades) {
     cout << "A new round begins. It's player "<< player_7spades
          << "'s turn to play." << endl;
-    // startRoundLoop(player_number);
 }
 
-RoundView::~RoundView() {}
-
-void plusPlayerNum(int &player_number){
-    player_number = player_number+1;
-    if(player_number == 5){
-        player_number = 1;
-    }
+void RoundView::printHumanInfo(vector<Card*> clubs, vector<Card*> diamonds, vector<Card*> hearts,
+                               vector<Card*> spades, vector<Card*> player_hand,
+                               vector<Card*> legal_plays)
+{
+    cout << "Cards on the table:" << endl;
+    cout << "Clubs: ";       printCardRank(clubs);
+    cout << "Diamonds: ";    printCardRank(diamonds);
+    cout << "Hearts: ";      printCardRank(hearts);
+    cout << "Spades: ";      printCardRank(spades);
+    cout << "Your hand: ";   printCardList(player_hand);
+    cout << "Legal plays: "; printCardList(legal_plays);
 }
 
-void RoundView::startTurns(int &player_number) {
-    Player* currentPlayer = controller_->getPlayer(player_number);
-    if (currentPlayer->isHuman()) {
-        cout << "Cards on the table:" << endl;
-        cout << "Clubs: ";
-        printClubs();
-        cout << "Diamonds: ";
-        printDiamonds();
-        cout << "Hearts: ";
-        printHearts();
-        cout << "Spades: ";
-        printSpades();
-        cout << "Your hand: ";
-        printHand(currentPlayer);
-        cout << "Legal plays: ";
-        printLegalPlays(currentPlayer);//<legal plays in your hand>"
-        turnLoop(player_number);
-    }
-    else {
-        turnLoop(player_number);
-    }
-}
 
-void RoundView::turnLoop(int &player_number){
-    int tempNum = player_number;
-    Player* currentPlayer = controller_->getPlayer(player_number);
-    while(tempNum == player_number) {
-        currentPlayer = controller_->getPlayer(player_number);
-        Command cmd;
-        if(currentPlayer->isHuman()) {
-            cmd = getCommand();
-        }
-        else{
-            cmd = controller_->playTurn(currentPlayer);
-        }
-        executeCommand(cmd, player_number);
-    }
-}
-
-void RoundView::startRoundLoop(int &player_number){
-    for(int i = 0; i<52; i++){
-        startTurns(player_number);
-    }
-    printScores();
-    controller_->updatePlayerScores();
-}
-
-void RoundView::printScores() {
-    for (int player_number = 1; player_number <= 4; ++player_number) {
-        Player* current_player = controller_->getPlayer(player_number);
+void RoundView::printPlayerScore(vector<Card*> discards, int current_score, int round_score, int player_number) {
         cout << "Player " << player_number << "'s discards: ";
-        printDiscards(current_player);
-        int current_score = current_player->getScore();
-        int round_score = controller_->getRoundScore(current_player);
-
-        cout << "Player " << player_number << "'s score: " << current_player->getScore();
-        cout << " + " << controller_->getRoundScore(current_player) << " = ";
+        printCardList(discards);
+        cout << "Player " << player_number << "'s score: " << current_score;
+        cout << " + " << round_score << " = ";
         cout << current_score + round_score << endl;
-    }
 }
 
-void printCardList(vector<Card*> list){
+void RoundView::printCardList(vector<Card*> list){
     for( int i = 0; i<list.size(); i++ ){
         cout<<*list.at(i)<<" ";
     }
     cout<<endl;
 }
 
-void printCardRank(vector<Card*> list){
+void RoundView::printCardRank(vector<Card*> list){
     for( int i = 0; i<list.size(); i++ ){
         cout<<list.at(i)->getRank()+1<<" ";
     }
     cout<<endl;
 }
 
-void RoundView::printClubs() {
-    vector<Card*> played_clubs = controller_->getClubs();
-    printCardRank(played_clubs);
-}
-
-void RoundView::printDiamonds() {
-    vector<Card*> played_diamonds = controller_->getDiamonds();
-    printCardRank(played_diamonds);
-}
-
-void RoundView::printHearts() {
-    vector<Card*> played_hearts = controller_->getHearts();
-    printCardRank(played_hearts);
-}
-
-void RoundView::printSpades() {
-    vector<Card*> played_spades = controller_->getSpades();
-    printCardRank(played_spades);
-}
-
-void RoundView::printHand(Player* player){
-    printCardList(player->getCards());
-}
-
-void RoundView::printDiscards(Player* player) {
-    printCardList(player->getDiscards());
-}
-
-void RoundView::printLegalPlays(Player* player){
-    printCardList(controller_->calculateLegalPlay(player));
-}
-
-void RoundView::printDeck(){
-    Deck* deck = controller_->getDeck();
+void RoundView::printDeck(Deck* deck){
     for(int i = 0; i<SUIT_COUNT;i++){
         for(int j = 0; j<RANK_COUNT;j++){
             cout<<*deck->at(13*i+j)<<" ";
@@ -135,48 +56,26 @@ void RoundView::printDeck(){
     }
 }
 
+void RoundView::printPlayMessage(int player_number, Card card_played) {
+    cout << "Player " << player_number << " plays " << card_played << "." << endl;
+}
+
+void RoundView::printIllegalPlay() {
+    cout << "This is not a legal play." << endl;
+}
+
+void RoundView::printDiscardMessage(int player_number, Card card_discarded) {
+    cout << "Player " << player_number << " discards " << card_discarded << "." << endl;
+}
+
+void RoundView::printBadDiscard() {
+    cout << "You have a legal play. You may not discard." << endl;
+}
+
 Command RoundView::getCommand(){
     Command cmd;
     cin.clear();
     cout << ">";
     cin>>cmd;
     return cmd;
-}
-
-void RoundView::executeCommand(Command cmd, int &player_number){
-    Player* currentPlayer = controller_->getPlayer(player_number);
-    switch (cmd.type){
-        case PLAY:
-            if ( controller_->isLegalPlay(currentPlayer, cmd.card) ) {
-                controller_->playCard(currentPlayer, cmd.card);
-                cout << "Player " << player_number << " plays " << cmd.card << "." << endl;
-                plusPlayerNum(player_number);
-            }
-            else {
-                cout << "This is not a legal play." << endl;
-                executeCommand(getCommand(), player_number);
-            }
-            break;
-        case DISCARD:
-            if (controller_->calculateLegalPlay(currentPlayer).size() == 0) {
-                controller_->discardCard(currentPlayer, cmd.card);
-                cout << "Player " << player_number << " discards " << cmd.card << "." << endl;
-                plusPlayerNum(player_number);
-            }
-            else {
-                cout << "You have a legal play. You may not discard." << endl;
-                executeCommand(getCommand(), player_number);
-            }
-            break;
-        case DECK:
-            printDeck();
-            break;
-        case QUIT:
-            exit(0);
-        case RAGEQUIT:
-            controller_->ragequit(player_number);
-            break;
-        default:
-            throw "Bad Command";
-    }
 }

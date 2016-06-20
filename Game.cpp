@@ -8,7 +8,8 @@ Game::Game(int seed) {
     while (!gameOver()) {
         if (round_controller_) {
             round_controller_->newRound();
-            round_controller_->startRound();
+            int player_7spades = round_controller_->who7Spades();
+            round_controller_->startRound(player_7spades);
         }
         else {
             round_controller_ = new RoundController(players_, seed);

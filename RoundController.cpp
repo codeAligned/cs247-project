@@ -7,7 +7,9 @@ RoundController::RoundController(vector<Player*> players, int seed) {
     Deck* new_deck = new Deck(seed);
     new_deck->shuffle();
     model_ = new RoundModel(players, new_deck);
-    view_ = new RoundView(who7Spades());
+    int player_7spades = who7Spades();
+    view_ = new RoundView(player_7spades);
+    startRound(player_7spades);
 }
 
 int RoundController::who7Spades() {
@@ -20,13 +22,90 @@ int RoundController::who7Spades() {
             }
         }
     }
+    return -1;
 }
 
 RoundController::~RoundController(){
     delete model_;
+    delete view_;
 }
 
-void RoundController::startRound(){}
+void RoundController::startRound(int &player_number){
+    for(int i = 0; i<52; i++){
+        startTurns(player_number);
+    }
+    updatePlayerScores();
+}
+
+void RoundController::startTurns(int &player_number) {
+    Player* currentPlayer = getPlayer(player_number);
+    if (currentPlayer->isHuman()) {
+        view_->printHumanInfo(getClubs(), getDiamonds(), getHearts(), getSpades(),
+                              currentPlayer->getCards(), calculateLegalPlay(currentPlayer));
+    }
+    turnLoop(player_number);
+}
+
+void RoundController::turnLoop(int &player_number){
+    int temp_num = player_number;
+    Player* currentPlayer = getPlayer(player_number);
+    while(temp_num == player_number) {
+        currentPlayer = getPlayer(player_number);
+        Command cmd;
+        if(currentPlayer->isHuman()) {
+            cmd = view_->getCommand();
+        }
+        else{
+            cmd = playTurn(currentPlayer);
+        }
+        executeCommand(cmd, player_number);
+    }
+}
+
+void RoundController::plusPlayerNum(int &player_number){
+    player_number = player_number+1;
+    if(player_number == 5){
+        player_number = 1;
+    }
+}
+
+void RoundController::executeCommand(Command cmd, int &player_number){
+    Player* currentPlayer = getPlayer(player_number);
+    switch (cmd.type){
+        case PLAY:
+            if ( isLegalPlay(currentPlayer, cmd.card) ) {
+                playCard(currentPlayer, cmd.card);
+                view_->printPlayMessage(player_number, cmd.card);
+                plusPlayerNum(player_number);
+            }
+            else {
+                view_->printIllegalPlay();
+                executeCommand(view_->getCommand(), player_number);
+            }
+            break;
+        case DISCARD:
+            if (calculateLegalPlay(currentPlayer).size() == 0) {
+                discardCard(currentPlayer, cmd.card);
+                view_->printDiscardMessage(player_number, cmd.card);
+                plusPlayerNum(player_number);
+            }
+            else {
+                view_->printBadDiscard();
+                executeCommand(view_->getCommand(), player_number);
+            }
+            break;
+        case DECK:
+            view_->printDeck(model_->getDeck());
+            break;
+        case QUIT:
+            exit(0);
+        case RAGEQUIT:
+            ragequit(player_number);
+            break;
+        default:
+            throw "Bad Command";
+    }
+}
 
 int RoundController::getRoundScore(Player* p) {
     int roundScore = 0;
@@ -40,18 +119,16 @@ int RoundController::getRoundScore(Player* p) {
 void RoundController::updatePlayerScores() {
     vector<Player*> players = model_->getPlayers();
     for (int i = 0; i < players.size(); ++i) {
-        int current_score = players.at(i)->getScore();
-        int round_score = getRoundScore(players.at(i));
+        Player* current_player = players.at(i);
+        int current_score = current_player->getScore();
+        int round_score = getRoundScore( current_player );
+        view_->printPlayerScore(current_player->getDiscards(), current_score, round_score, i+1);
         players.at(i)->setScore(current_score + round_score);
     }
 }
 
 Player* RoundController::getPlayer(int playerID){
     return model_->getPlayer(playerID);
-}
-
-Deck* RoundController::getDeck() const{
-    return model_->getDeck();
 }
 
 void RoundController::playCard(Player* p, Card c){
@@ -139,4 +216,5 @@ void RoundController::ragequit(int player_number) {
 
 void RoundController::newRound() {
     model_->newRound();
+    view_->printNewRound(who7Spades());
 }
