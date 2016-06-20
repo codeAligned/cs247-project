@@ -6,7 +6,7 @@ RoundView::RoundView(int player_7spades) {
     printNewRound(player_7spades);
 }
 
-void RoundView::printNewRound(int player_7spades) {
+void RoundView::printNewRound(int player_7spades) const {
     cout << "A new round begins. It's player "<< player_7spades
          << "'s turn to play." << endl;
 }
@@ -14,7 +14,7 @@ void RoundView::printNewRound(int player_7spades) {
 // Print things for human player's turn
 void RoundView::printHumanInfo(vector<Card*> clubs, vector<Card*> diamonds, vector<Card*> hearts,
                                vector<Card*> spades, vector<Card*> player_hand,
-                               vector<Card*> legal_plays)
+                               vector<Card*> legal_plays) const
 {
     cout << "Cards on the table:" << endl;
     cout << "Clubs: ";       printCardRank(clubs);
@@ -26,7 +26,8 @@ void RoundView::printHumanInfo(vector<Card*> clubs, vector<Card*> diamonds, vect
 }
 
 // Print player's discards, current score and new score.
-void RoundView::printPlayerScore(vector<Card*> discards, int current_score, int round_score, int player_number) {
+void RoundView::printPlayerScore(vector<Card*> discards, int current_score,
+                                int round_score, int player_number) const {
         cout << "Player " << player_number << "'s discards: ";
         printCardList(discards);
         cout << "Player " << player_number << "'s score: " << current_score;
@@ -35,7 +36,7 @@ void RoundView::printPlayerScore(vector<Card*> discards, int current_score, int 
 }
 
 // Print cards' ranks and suits
-void RoundView::printCardList(vector<Card*> list){
+void RoundView::printCardList(vector<Card*> list) const{
     for( int i = 0; i < list.size(); ++i ){
         cout << *list.at(i) << " ";
     }
@@ -43,18 +44,18 @@ void RoundView::printCardList(vector<Card*> list){
 }
 
 // Print only cards' ranks (for cards on table)
-void RoundView::printCardRank(vector<Card*> list){
+void RoundView::printCardRank(vector<Card*> list) const {
     for(int i = 0; i<list.size(); ++i ) {
         cout << list.at(i)->getRank()+1 << " ";
     }
     cout << endl;
 }
 
-void RoundView::printRageQuitMessage(int player_number) {
+void RoundView::printRageQuitMessage(int player_number) const {
     cout << "Player " << player_number << " ragequits. A computer will now take over." << endl;
 }
 
-void RoundView::printDeck(Deck* deck){
+void RoundView::printDeck(Deck* deck) const {
     for(int suit_index = 0; suit_index < SUIT_COUNT; ++suit_index) {
         for(int rank_index = 0; rank_index < RANK_COUNT; ++rank_index) {
             cout << * (deck->at( 13*suit_index + rank_index )) << " ";
@@ -63,18 +64,18 @@ void RoundView::printDeck(Deck* deck){
     }
 }
 
-void RoundView::printPlayMessage(int player_number, Card card_played) {
+void RoundView::printPlayMessage(int player_number, Card card_played) const {
     cout << "Player " << player_number << " plays " << card_played << "." << endl;
 }
 
-void RoundView::printIllegalPlay() {
+void RoundView::printIllegalPlay() const {
     cout << "This is not a legal play." << endl;
 }
 
-void RoundView::printDiscardMessage(int player_number, Card card_discarded) {
+void RoundView::printDiscardMessage(int player_number, Card card_discarded) const {
     cout << "Player " << player_number << " discards " << card_discarded << "." << endl;
 }
 
-void RoundView::printBadDiscard() {
+void RoundView::printBadDiscard() const {
     cout << "You have a legal play. You may not discard." << endl;
 }
