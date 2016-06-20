@@ -53,7 +53,7 @@ void RoundController::turnLoop(int &player_number) {
         currentPlayer = getPlayer(player_number);
         Command cmd;
         if(currentPlayer->isHuman()) {
-            cmd = view_->getCommand();
+            cmd = currentPlayer->playTurn(this);
         }
         else{
             cmd = playTurn(currentPlayer);
@@ -80,7 +80,7 @@ void RoundController::executeCommand(Command cmd, int &player_number) {
             }
             else {
                 view_->printIllegalPlay();
-                executeCommand(view_->getCommand(), player_number);
+                executeCommand(currentPlayer->playTurn(this), player_number);
             }
             break;
         case DISCARD:
@@ -91,7 +91,7 @@ void RoundController::executeCommand(Command cmd, int &player_number) {
             }
             else {
                 view_->printBadDiscard();
-                executeCommand(view_->getCommand(), player_number);
+                executeCommand(currentPlayer->playTurn(this), player_number);
             }
             break;
         case DECK:

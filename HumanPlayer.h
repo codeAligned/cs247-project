@@ -7,6 +7,7 @@
 class HumanPlayer: public Player {
 public:
     HumanPlayer();
+    Command playTurn(RoundController*);
     bool isHuman() const;
 private:
 

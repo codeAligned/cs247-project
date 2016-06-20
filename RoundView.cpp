@@ -74,12 +74,3 @@ void RoundView::printDiscardMessage(int player_number, Card card_discarded) {
 void RoundView::printBadDiscard() {
     cout << "You have a legal play. You may not discard." << endl;
 }
-
-// Get command inputted by user
-Command RoundView::getCommand(){
-    Command cmd;
-    cin.clear();
-    cout << ">";
-    cin>>cmd;
-    return cmd;
-}
