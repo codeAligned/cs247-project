@@ -12,7 +12,6 @@ public:
     Deck(int);
     ~Deck();
     void shuffle();
-    friend std::ostream& operator<<(std::ostream&, const Deck &);
     std::vector<Hand*> dealCards();
     Card* at(int);
 private:

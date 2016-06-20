@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <iostream>
 using namespace std;
 
 Player::Player() {
@@ -18,7 +17,7 @@ void Player::playCard(Card c){
     hand_->play(c);
 }
 
-void Player::discardCards(Card c){
+void Player::discardCard(Card c){
     hand_->discard(c);
 }
 

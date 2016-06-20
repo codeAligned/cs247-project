@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// Create players and round controller.
 Game::Game(int seed) {
     createPlayers();
     round_controller_ = nullptr;

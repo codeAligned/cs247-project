@@ -1,4 +1,3 @@
-#include <cmath>
 #include "RoundController.h"
 
 using namespace std;
@@ -12,7 +11,7 @@ RoundController::RoundController(vector<Player*> players, int seed) {
     startRound(player_7spades);
 }
 
-int RoundController::who7Spades() {
+int RoundController::who7Spades() const{
     vector<Player*> players = model_->getPlayers();
     for ( int i=0; i<players.size(); i++ ){
         vector<Card*> tempHand = players.at(i)->getCards();
@@ -25,12 +24,12 @@ int RoundController::who7Spades() {
     return -1;
 }
 
-RoundController::~RoundController(){
+RoundController::~RoundController() {
     delete model_;
     delete view_;
 }
 
-void RoundController::startRound(int &player_number){
+void RoundController::startRound(int &player_number) {
     for(int i = 0; i<52; i++){
         startTurns(player_number);
     }
@@ -46,7 +45,7 @@ void RoundController::startTurns(int &player_number) {
     turnLoop(player_number);
 }
 
-void RoundController::turnLoop(int &player_number){
+void RoundController::turnLoop(int &player_number) {
     int temp_num = player_number;
     Player* currentPlayer = getPlayer(player_number);
     while(temp_num == player_number) {
@@ -62,14 +61,14 @@ void RoundController::turnLoop(int &player_number){
     }
 }
 
-void RoundController::plusPlayerNum(int &player_number){
+void RoundController::plusPlayerNum(int &player_number) {
     player_number = player_number+1;
     if(player_number == 5){
         player_number = 1;
     }
 }
 
-void RoundController::executeCommand(Command cmd, int &player_number){
+void RoundController::executeCommand(Command cmd, int &player_number) {
     Player* currentPlayer = getPlayer(player_number);
     switch (cmd.type){
         case PLAY:
@@ -107,7 +106,7 @@ void RoundController::executeCommand(Command cmd, int &player_number){
     }
 }
 
-int RoundController::getRoundScore(Player* p) {
+int RoundController::getRoundScore(Player* p) const {
     int roundScore = 0;
     vector<Card*> discards = p->getDiscards();
     for (int i = 0; i < discards.size(); i++) {
@@ -127,7 +126,7 @@ void RoundController::updatePlayerScores() {
     }
 }
 
-Player* RoundController::getPlayer(int playerID){
+Player* RoundController::getPlayer(int playerID) const{
     return model_->getPlayer(playerID);
 }
 
@@ -137,7 +136,7 @@ void RoundController::playCard(Player* p, Card c){
 }
 
 void RoundController::discardCard(Player* p, Card c){
-    p->discardCards(c);
+    p->discardCard(c);
 }
 
 vector<Card*> RoundController::calculateLegalPlay(Player* p) const{
@@ -179,20 +178,20 @@ bool RoundController::isLegalPlay(Player* p, Card c) const{
     return false;
 }
 
-vector<Card*> RoundController::getClubs() {
+vector<Card*> RoundController::getClubs() const {
     return filterBySuit(static_cast<Suit>(0));
 }
-vector<Card*> RoundController::getDiamonds() {
+vector<Card*> RoundController::getDiamonds() const {
     return filterBySuit(static_cast<Suit>(1));
 }
-vector<Card*> RoundController::getHearts() {
+vector<Card*> RoundController::getHearts() const {
     return filterBySuit(static_cast<Suit>(2));
 }
-vector<Card*> RoundController::getSpades() {
+vector<Card*> RoundController::getSpades() const {
     return filterBySuit(static_cast<Suit>(3));
 }
 
-vector<Card*> RoundController::filterBySuit(Suit suit){
+vector<Card*> RoundController::filterBySuit(Suit suit) const {
     vector<Card*> temp = model_->getPlayedCards();
     vector<Card*> ret = vector<Card*>();
     for(int i = 0; i<temp.size(); i++ ){

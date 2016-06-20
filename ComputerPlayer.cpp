@@ -1,13 +1,8 @@
-
-#include "RoundController.h"
-//#include "Player.h"
-//#include "ComputerPlayer.h"
+#include "ComputerPlayer.h"
 
 using namespace std;
 
-ComputerPlayer::ComputerPlayer() {
-
-}
+ComputerPlayer::ComputerPlayer() {}
 
 ComputerPlayer::ComputerPlayer(Player& player) {
     hand_ = new Hand(*player.getHand());
@@ -18,6 +13,7 @@ bool ComputerPlayer::isHuman() const{
     return false;
 }
 
+// Automatically plays computer's turn
 Command ComputerPlayer::playTurn(RoundController* controller) {
     vector<Card*> legalPlays = controller->calculateLegalPlay(this);
     vector<Card*> hand = hand_->getCards();
@@ -32,7 +28,7 @@ Command ComputerPlayer::playTurn(RoundController* controller) {
             }
         }
     }
-    //else discard
+    //else discard first card in hand
     Command cmd = Command();
     cmd.card = *hand.at(0);
     cmd.type = DISCARD;

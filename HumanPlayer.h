@@ -6,9 +6,7 @@
 
 class HumanPlayer: public Player {
 public:
-    // HumanPlayer(Player);
     HumanPlayer();
-    // void playTurn();
     bool isHuman() const;
 private:
 

@@ -1,6 +1,7 @@
 #ifndef _PLAYER_
 #define _PLAYER_
 
+#include <iostream>
 #include <vector>
 #include "Card.h"
 #include "Hand.h"
@@ -17,7 +18,7 @@ public:
     void deleteHand();
     std::vector<Card*> getDiscards();
     std::vector<Card*> getCards();
-    void discardCards(Card);
+    void discardCard(Card);
     void playCard(Card);
     void setHand(Hand*);
     void setScore(int);

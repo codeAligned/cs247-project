@@ -2,39 +2,35 @@
 #include <iostream>
 using namespace std;
 
-Hand::Hand(){
-
-}
+// Copy constructor for ragequit
 Hand::Hand(Hand& hand){
     cards_ = hand.cards_;
     discards_ = hand.discards_;
 }
 
-Hand::~Hand(){
-//   for(int i =0;i<cards_.size();i++){
-//       delete cards_.at(i);
-//   }
-//    for(int i =0;i<discards_.size();i++){
-//        delete discards_.at(i);
-//    }
+// Overloaded constructor
+Hand::Hand(vector<Card*> h){
+    cards_ = h;
 }
-int findLocation(Card c,vector<Card*> list){
-    for(int i=0;i<list.size();i++){
-        if(list.at(i)->getSuit() == c.getSuit() && list.at(i)->getRank() == c.getRank()){
+
+Hand::~Hand() {} // Needed for player's DeleteHand method and destructor to delete hand pointer
+
+// Finds index of card in list of cards.
+int findLocation(Card c, vector<Card*> list){
+    for(int i = 0; i < list.size(); ++i){
+        if( *(list.at(i)) == c ) {
             return i;
         }
     }
     throw "Card not found";
 }
 
-Hand::Hand(vector<Card*> h){
-    cards_ = h;
-}
 void Hand::play(Card c) {
     int loc = findLocation(c,cards_);
     cards_.erase(cards_.begin() + loc);
-
 }
+
+// Remove from hand, add to discards
 void Hand::discard(Card c) {
     int loc = findLocation(c,cards_);
     discards_.push_back(cards_.at(loc));

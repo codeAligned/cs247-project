@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Default seed value, global since shuffle expects global seed variable.
 int seed = 0;
 
 Deck::Deck() {
@@ -28,12 +29,7 @@ Deck::~Deck() {
     }
 }
 
-ostream& operator<<(ostream& os, const Deck &d) {
-    for(int i = 0; i < d.cards_.size(); i++) {
-        cout << d.cards_.at(i); // Fix this later.
-    }
-}
-
+// Return vector of 4 hands with 13 cards each.
 vector<Hand*> Deck::dealCards(){
     vector<Hand*> hands = vector<Hand*>();
     for( int i=0;i<4;i++){

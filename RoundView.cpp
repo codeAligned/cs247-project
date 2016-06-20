@@ -11,6 +11,7 @@ void RoundView::printNewRound(int player_7spades) {
          << "'s turn to play." << endl;
 }
 
+// Print things for human player's turn
 void RoundView::printHumanInfo(vector<Card*> clubs, vector<Card*> diamonds, vector<Card*> hearts,
                                vector<Card*> spades, vector<Card*> player_hand,
                                vector<Card*> legal_plays)
@@ -24,7 +25,7 @@ void RoundView::printHumanInfo(vector<Card*> clubs, vector<Card*> diamonds, vect
     cout << "Legal plays: "; printCardList(legal_plays);
 }
 
-
+// Print player's discards, current score and new score.
 void RoundView::printPlayerScore(vector<Card*> discards, int current_score, int round_score, int player_number) {
         cout << "Player " << player_number << "'s discards: ";
         printCardList(discards);
@@ -33,6 +34,7 @@ void RoundView::printPlayerScore(vector<Card*> discards, int current_score, int 
         cout << current_score + round_score << endl;
 }
 
+// Print cards' ranks and suits
 void RoundView::printCardList(vector<Card*> list){
     for( int i = 0; i<list.size(); i++ ){
         cout<<*list.at(i)<<" ";
@@ -40,6 +42,7 @@ void RoundView::printCardList(vector<Card*> list){
     cout<<endl;
 }
 
+// Print only cards' ranks (for cards on table)
 void RoundView::printCardRank(vector<Card*> list){
     for( int i = 0; i<list.size(); i++ ){
         cout<<list.at(i)->getRank()+1<<" ";
@@ -48,9 +51,9 @@ void RoundView::printCardRank(vector<Card*> list){
 }
 
 void RoundView::printDeck(Deck* deck){
-    for(int i = 0; i<SUIT_COUNT;i++){
-        for(int j = 0; j<RANK_COUNT;j++){
-            cout<<*deck->at(13*i+j)<<" ";
+    for(int i = 0; i < SUIT_COUNT; i++){
+        for(int j = 0; j < RANK_COUNT; j++){
+            cout << *deck->at(13*i+j) << " ";
         }
         cout<<endl;
     }
@@ -72,6 +75,7 @@ void RoundView::printBadDiscard() {
     cout << "You have a legal play. You may not discard." << endl;
 }
 
+// Get command inputted by user
 Command RoundView::getCommand(){
     Command cmd;
     cin.clear();
