@@ -100,6 +100,7 @@ void RoundController::executeCommand(Command cmd, int &player_number) {
         case QUIT:
             exit(0);
         case RAGEQUIT:
+            view_->printRageQuitMessage(player_number);
             ragequit(player_number);
             break;
         default:

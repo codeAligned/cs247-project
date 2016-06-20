@@ -50,6 +50,10 @@ void RoundView::printCardRank(vector<Card*> list){
     cout << endl;
 }
 
+void RoundView::printRageQuitMessage(int player_number) {
+    cout << "Player " << player_number << " ragequits. A computer will now take over." << endl;
+}
+
 void RoundView::printDeck(Deck* deck){
     for(int suit_index = 0; suit_index < SUIT_COUNT; ++suit_index) {
         for(int rank_index = 0; rank_index < RANK_COUNT; ++rank_index) {

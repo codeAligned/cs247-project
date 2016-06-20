@@ -17,6 +17,7 @@ public:
     void printPlayerScore(std::vector<Card*>, int, int, int);
     void printPlayMessage(int, Card);
     void printDiscardMessage(int, Card);
+    void printRageQuitMessage(int);
     void printIllegalPlay();
     void printBadDiscard();
     void printHumanInfo(std::vector<Card*>, std::vector<Card*>, std::vector<Card*>,
