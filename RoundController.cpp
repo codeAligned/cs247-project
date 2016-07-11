@@ -1,4 +1,5 @@
 #include "RoundController.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -185,17 +186,18 @@ bool RoundController::isLegalPlay(Player* p, Card c) const{
 }
 
 vector<Card*> RoundController::getClubs() const {
-    return filterBySuit(static_cast<Suit>(0));
+    return filterBySuit(CLUB);
 }
 vector<Card*> RoundController::getDiamonds() const {
-    return filterBySuit(static_cast<Suit>(1));
+    return filterBySuit(DIAMOND);
 }
 vector<Card*> RoundController::getHearts() const {
-    return filterBySuit(static_cast<Suit>(2));
+    return filterBySuit(HEART);
 }
 vector<Card*> RoundController::getSpades() const {
-    return filterBySuit(static_cast<Suit>(3));
+    return filterBySuit(SPADE);
 }
+bool compareCards(Card* a, Card* b) { return (a->getRank() < b->getRank()); };
 
 vector<Card*> RoundController::filterBySuit(Suit suit) const {
     vector<Card*> temp = model_->getPlayedCards();
@@ -205,6 +207,7 @@ vector<Card*> RoundController::filterBySuit(Suit suit) const {
             ret.push_back(temp.at(i));
         }
     }
+    sort(ret.begin(),ret.end(),compareCards);
     return ret;
 }
 

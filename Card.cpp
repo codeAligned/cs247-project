@@ -32,6 +32,7 @@ ostream &operator<<(ostream &out, const Card &c){
 	return out;
 }
 
+
 istream &operator>>(istream &in, Card &c){
 	string suits = "CDHS", ranks = "A234567891JQK";
 

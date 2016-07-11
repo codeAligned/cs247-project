@@ -1,3 +1,4 @@
+#include <sstream>
 #include "RoundView.h"
 
 using namespace std;
@@ -17,12 +18,12 @@ void RoundView::printHumanInfo(vector<Card*> clubs, vector<Card*> diamonds, vect
                                vector<Card*> legal_plays) const
 {
     cout << "Cards on the table:" << endl;
-    cout << "Clubs: ";       printCardRank(clubs);
-    cout << "Diamonds: ";    printCardRank(diamonds);
-    cout << "Hearts: ";      printCardRank(hearts);
-    cout << "Spades: ";      printCardRank(spades);
-    cout << "Your hand: ";   printCardList(player_hand);
-    cout << "Legal plays: "; printCardList(legal_plays);
+    cout << "Clubs:";       printCardRank(clubs);
+    cout << "Diamonds:";    printCardRank(diamonds);
+    cout << "Hearts:";      printCardRank(hearts);
+    cout << "Spades:";      printCardRank(spades);
+    cout << "Your hand:";   printCardList(player_hand);
+    cout << "Legal plays:"; printCardList(legal_plays);
 }
 
 // Print player's discards, current score and new score.
@@ -38,15 +39,39 @@ void RoundView::printPlayerScore(vector<Card*> discards, int current_score,
 // Print cards' ranks and suits
 void RoundView::printCardList(vector<Card*> list) const{
     for( int i = 0; i < list.size(); ++i ){
-        cout << *list.at(i) << " ";
+        cout << " "<<*list.at(i);
     }
     cout << endl;
+}
+
+string getRank(int rank){
+    string s;
+    switch (rank){
+        case 1:
+            s = "A";
+            break;
+        case 11:
+            s = "J";
+            break;
+        case 12:
+            s = "Q";
+            break;
+        case 13:
+            s = "K";
+            break;
+        default:
+            stringstream ss;
+            ss << rank;
+            s = ss.str();
+    }
+
+    return s;
 }
 
 // Print only cards' ranks (for cards on table)
 void RoundView::printCardRank(vector<Card*> list) const {
     for(int i = 0; i<list.size(); ++i ) {
-        cout << list.at(i)->getRank()+1 << " ";
+        cout << " " << getRank(list.at(i)->getRank()+1);
     }
     cout << endl;
 }
@@ -58,7 +83,7 @@ void RoundView::printRageQuitMessage(int player_number) const {
 void RoundView::printDeck(Deck* deck) const {
     for(int suit_index = 0; suit_index < SUIT_COUNT; ++suit_index) {
         for(int rank_index = 0; rank_index < RANK_COUNT; ++rank_index) {
-            cout << * (deck->at( 13*suit_index + rank_index )) << " ";
+            cout << " " <<* (deck->at( 13*suit_index + rank_index ));
         }
         cout << endl;
     }
