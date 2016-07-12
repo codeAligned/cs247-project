@@ -49,7 +49,7 @@ bool Game::gameOver() {
         players_ = round_controller_->getPlayers();
     }
     for(int i= 0; i < players_.size(); ++i) {
-        if (players_.at(i)->getScore() > 80) {
+        if (players_.at(i)->getScore() >= 80) {
             return true;
         }
     }
