@@ -1,5 +1,6 @@
 #include "deck_window.h"
 #include <iostream>
+#include <sstream>
 
 // Sets the horizontal box to have homogeneous spacing (all elements are of the same size), and to put 10 pixels
 // between each widget. Initializes the pixel buffer for the null place holder card, and the 10 of spades.
@@ -102,7 +103,9 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ),
 		player_modules[i] = Gtk::manage(new Gtk::VBox());
 		player_list->pack_start(*player_modules[i]);
 
-		pLabels[i] = new Gtk::Label("Player X");
+		std::stringstream ss;
+		ss << i+1;
+		pLabels[i] = new Gtk::Label("Player " + ss.str());
 	    player_modules[i]->pack_start(*pLabels[i]);
 
 	    scoreLabels[i] = new Gtk::Label("Score: ");
