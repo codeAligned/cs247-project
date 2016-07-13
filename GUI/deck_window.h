@@ -14,6 +14,7 @@ class Deck_Window : public Gtk::Window {
 public:
     Deck_Window();
     void onButtonClicked();
+    void onNewGame();
     virtual ~Deck_Window();
 	
 private:

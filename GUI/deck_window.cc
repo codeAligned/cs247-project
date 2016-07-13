@@ -34,9 +34,10 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"), hboxHand( true, 10 )
 	//Add game controls
 	vbox.add(control_panel);
 	control_panel.add(new_game);
+	new_game.signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onNewGame));
     control_panel.pack_start( nameLabel );
     control_panel.pack_start( nameField );
-    nameField.set_text( "" );
+    nameField.set_text( "0" );
     control_panel.add(quit_game);
 
 //Adding the played cards section -----------------------------------
@@ -96,6 +97,7 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"), hboxHand( true, 10 )
 		handButtons[i]->set_image(*(new Gtk::Image(nullCardPixbuf)));
 		// card[i] = new Gtk::Image( nullCardPixbuf );
 		hboxHand.add(*handButtons[i]);
+		handButtons[i]->signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onButtonClicked));
 	}
 	
 	// The final step is to display this newly created widget.
@@ -106,6 +108,10 @@ Deck_Window::~Deck_Window() {
 	//SHOULD DO THIS TODO
 	// for (int i = 0; i < 52; i++ ) delete card[i];
 	// for (int i = 0; i < 13; i++ ) delete hand[i];
+}
+
+void Deck_Window::onNewGame(){
+	std::cout<<"New Game. Seed = "<< nameField.get_text() <<std::endl;
 }
 
 void Deck_Window::onButtonClicked()
@@ -122,4 +128,5 @@ void Deck_Window::onButtonClicked()
     {
         nextFace = (Faces) (nextFace+1);
     }
+    std::cout<< "Button clicked"<<std::endl;
 }
