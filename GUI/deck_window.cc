@@ -8,7 +8,7 @@
 // with an image in it.
 //
 // Since widgets cannot be shared, must use pixel buffers to share images.
-Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHearts( true, 10 ), hboxSpades( true, 10 ), hboxHand( true, 10 )
+Deck_Window::Deck_Window() : playedLabel("Played cards:"), hboxHand( true, 10 )
 							 , control_panel( true, 10 ), new_game( "New Game" ), quit_game( "Quit" ), nameLabel( "Enter seed:" )
 							 , handLabel( "Current Hand:" ){
 
