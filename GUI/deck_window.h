@@ -22,9 +22,13 @@ private:
     Faces nextFace;
 	
     // Member widgets:
-    Gtk::Image * card[13];          // Images to display.
+    Gtk::Image * card[52];          // Images to display.
     Gtk::Button button;           // Button that will hold an image.
-    Gtk::HBox hbox;             // Horizontal box for aligning widgets in the window.
+    Gtk::HBox hboxClubs;             // Horizontal box for aligning widgets in the window.
+    Gtk::HBox hboxDias;             // Horizontal box for aligning widgets in the window.
+    Gtk::HBox hboxHearts;             // Horizontal box for aligning widgets in the window.
+    Gtk::HBox hboxSpades;             // Horizontal box for aligning widgets in the window.
+    Gtk::VBox vbox;
     Gtk::Frame frame;            // Create a nice framed border for the box.
 };
 
