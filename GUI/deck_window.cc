@@ -42,13 +42,16 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ),
 //Adding the played cards section -----------------------------------
     vbox.add(playedLabel);
 	// Add the horizontal box for laying out the images to the frame.
-	vbox.add( hboxClubs );
-	
-	// Initialize 4 empty cards and place them in the box.
-	for (int i = 0; i < 13; i++ ) {
-		card[i] = new Gtk::Image( nullCardPixbuf );
-		hboxClubs.add( *card[i] );
-	}
+
+    for (int i=0;i<4;i++){
+    	hboxCards[i] = Gtk::manage(new Gtk::HBox());
+		vbox.add( *hboxCards[i] );
+		// Initialize 4 empty cards and place them in the box.
+		for (int j = 0+13*i; j < 13*(i+1); j++ ) {
+			card[j] = new Gtk::Image( nullCardPixbuf );
+			hboxCards[i]->add( *card[j] );
+		}
+    }
 	
 	std::cout<<"Finished loop"<<std::endl;
 	// Initialize the 5th card and place the image into the button.
@@ -57,43 +60,10 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ),
 	std::cout<<"Finished setting card"<<std::endl;
 
 	// Attach event listener to button
-	button.signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onButtonClicked));
+	// button.signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onButtonClicked));
 			
 	// Add the button to the box.
 	// hboxClubs.add( button );
-// -------------------------------------
-// UGLY TEMP CODE UNTIL I FIGURE THIS ARRAY SHIT
-
-	vbox.add( hboxDias );
-	
-	// Initialize 4 empty cards and place them in the box.
-	for (int i = 13; i < 26; i++ ) {
-		card[i] = new Gtk::Image( nullCardPixbuf );
-		hboxDias.add( *card[i] );
-	}
-
-// -------------------------------------
-// UGLY TEMP CODE UNTIL I FIGURE THIS ARRAY SHIT
-	
-	vbox.add( hboxHearts );
-	
-	// Initialize 4 empty cards and place them in the box.
-	for (int i = 26; i < 39; i++ ) {
-		card[i] = new Gtk::Image( nullCardPixbuf );
-		hboxHearts.add( *card[i] );
-	}
-
-// -------------------------------------
-// UGLY TEMP CODE UNTIL I FIGURE THIS ARRAY SHIT
-	
-	vbox.add( hboxSpades );
-	
-	// Initialize 13 empty cards and place them in the box.
-	for (int i = 39; i < 52; i++ ) {
-		card[i] = new Gtk::Image( nullCardPixbuf );
-		hboxSpades.add( *card[i] );
-	}
-
 // Adding player boxes
 	player_list = Gtk::manage(new Gtk::HBox());
 	vbox.pack_start( *player_list );

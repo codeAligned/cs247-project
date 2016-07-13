@@ -25,12 +25,13 @@ private:
     // Member widgets:
     Gtk::Image * card[52];          // Images to display.
     Gtk::Image * hand[13];          // Images to display.
-    Gtk::Button button;           // Button that will hold an image.
+    // Gtk::Button button;           // Button that will hold an image.
     Gtk::Button * handButtons[13];
     Gtk::HBox hboxClubs;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxDias;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxHearts;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxSpades;             // Horizontal box for aligning widgets in the window.
+    Gtk::HBox * hboxCards[4];
     Gtk::HBox hboxHand;
     Gtk::VBox vbox;
     Gtk::HBox control_panel;
