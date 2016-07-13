@@ -6,6 +6,7 @@
 #include <gtkmm/box.h>
 #include <gtkmm/button.h>
 #include <gtkmm/frame.h>
+#include <gtkmm/entry.h>
 
 #include "DeckGUI.h"
 
@@ -23,12 +24,21 @@ private:
 	
     // Member widgets:
     Gtk::Image * card[52];          // Images to display.
+    Gtk::Image * hand[13];          // Images to display.
     Gtk::Button button;           // Button that will hold an image.
     Gtk::HBox hboxClubs;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxDias;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxHearts;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxSpades;             // Horizontal box for aligning widgets in the window.
+    Gtk::HBox hboxHand;
     Gtk::VBox vbox;
+    Gtk::HBox control_panel;
+    Gtk::Entry nameField; // Text entry for the user's name
+    Gtk::Button new_game;
+    Gtk::Button quit_game;
+    Gtk::Label playedLabel;
+    Gtk::Label handLabel;
+    Gtk::Label nameLabel;
     Gtk::Frame frame;            // Create a nice framed border for the box.
 };
 

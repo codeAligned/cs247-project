@@ -7,7 +7,9 @@
 // with an image in it.
 //
 // Since widgets cannot be shared, must use pixel buffers to share images.
-Deck_Window::Deck_Window() : hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHearts( true, 10 ), hboxSpades( true, 10 ){
+Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHearts( true, 10 ), hboxSpades( true, 10 ), hboxHand( true, 10 )
+							 , control_panel( true, 10 ), new_game( "New Game" ), quit_game( "Quit" ), nameLabel( "Enter seed:" )
+							 , handLabel( "Current Hand:" ){
 
     nextCard = 0;
     nextSuit = (Suits) 0;
@@ -20,14 +22,24 @@ Deck_Window::Deck_Window() : hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHe
 	set_border_width( 10 );
 		
 	// Set the look of the frame.
-	frame.set_label( "Played cards:" );
+	frame.set_label( "Straights!" );
 	frame.set_label_align( Gtk::ALIGN_CENTER, Gtk::ALIGN_TOP );
 	frame.set_shadow_type( Gtk::SHADOW_ETCHED_OUT );
 	
 	// Add the frame to the window. Windows can only hold one widget, same for frames.
 	add( frame );
 	frame.add(vbox);
-	
+
+	//Add game controls
+	vbox.add(control_panel);
+	control_panel.add(new_game);
+    control_panel.pack_start( nameLabel );
+    control_panel.pack_start( nameField );
+    nameField.set_text( "" );
+    control_panel.add(quit_game);
+
+//Adding the played cards section -----------------------------------
+    vbox.add(playedLabel);
 	// Add the horizontal box for laying out the images to the frame.
 	vbox.add( hboxClubs );
 	
@@ -51,7 +63,7 @@ Deck_Window::Deck_Window() : hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHe
 // -------------------------------------
 // UGLY TEMP CODE UNTIL I FIGURE THIS ARRAY SHIT
 
-	vbox.add( hboxDias ) ;
+	vbox.add( hboxDias );
 	
 	// Initialize 4 empty cards and place them in the box.
 	for (int i = 13; i < 26; i++ ) {
@@ -62,7 +74,7 @@ Deck_Window::Deck_Window() : hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHe
 // -------------------------------------
 // UGLY TEMP CODE UNTIL I FIGURE THIS ARRAY SHIT
 	
-	vbox.add( hboxHearts ) ;
+	vbox.add( hboxHearts );
 	
 	// Initialize 4 empty cards and place them in the box.
 	for (int i = 26; i < 39; i++ ) {
@@ -73,12 +85,20 @@ Deck_Window::Deck_Window() : hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHe
 // -------------------------------------
 // UGLY TEMP CODE UNTIL I FIGURE THIS ARRAY SHIT
 	
-	vbox.add( hboxSpades ) ;
+	vbox.add( hboxSpades );
 	
-	// Initialize 4 empty cards and place them in the box.
+	// Initialize 13 empty cards and place them in the box.
 	for (int i = 39; i < 52; i++ ) {
 		card[i] = new Gtk::Image( nullCardPixbuf );
 		hboxSpades.add( *card[i] );
+	}
+// Adding the hand
+	vbox.add( handLabel);
+	vbox.add( hboxHand );
+	// Initialize 13 empty cards and place them in the box.
+	for (int i = 0; i < 13; i++ ) {
+		hand[i] = new Gtk::Image( nullCardPixbuf );
+		hboxHand.add( *hand[i] );
 	}
 	
 	// The final step is to display this newly created widget.
@@ -86,7 +106,8 @@ Deck_Window::Deck_Window() : hboxClubs( true, 10 ), hboxDias( true, 10 ), hboxHe
 }
 
 Deck_Window::~Deck_Window() {
-	for (int i = 0; i < 13; i++ ) delete card[i];
+	for (int i = 0; i < 52; i++ ) delete card[i];
+	for (int i = 0; i < 13; i++ ) delete hand[i];
 }
 
 void Deck_Window::onButtonClicked()
