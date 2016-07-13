@@ -57,13 +57,17 @@ bool Game::gameOver() {
 }
 
 void Game::displayWinner() {
-    int winner = 0;
+    int winners[4] = {-1, -1, -1, -1};
     int min_score = players_.at(0)->getScore();
     for (int i = 0; i < players_.size(); ++i) {
-        if (players_.at(i)->getScore() < min_score) {
+        if (players_.at(i)->getScore() <= min_score) {
             min_score = players_.at(i)->getScore();
-            winner = i;
+            winners[i] = i;
         }
     }
-    cout << "Player " << winner+1 << " wins!" << endl;
+    for (int i = 0; i < 4; ++i) {
+        if (winners[i] != -1) {
+            cout << "Player " << winners[i]+1 << " wins!" << endl;
+        }
+    }
 }
