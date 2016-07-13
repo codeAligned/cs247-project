@@ -26,6 +26,7 @@ private:
     Gtk::Image * card[52];          // Images to display.
     Gtk::Image * hand[13];          // Images to display.
     Gtk::Button button;           // Button that will hold an image.
+    Gtk::Button * handButtons[13];
     Gtk::HBox hboxClubs;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxDias;             // Horizontal box for aligning widgets in the window.
     Gtk::HBox hboxHearts;             // Horizontal box for aligning widgets in the window.
@@ -33,12 +34,17 @@ private:
     Gtk::HBox hboxHand;
     Gtk::VBox vbox;
     Gtk::HBox control_panel;
+    Gtk::HBox* player_list;
+    Gtk::VBox* player_modules[4];
     Gtk::Entry nameField; // Text entry for the user's name
     Gtk::Button new_game;
     Gtk::Button quit_game;
+    Gtk::Button * ragequitButtons[4];
     Gtk::Label playedLabel;
     Gtk::Label handLabel;
     Gtk::Label nameLabel;
+    Gtk::Label * scoreLabels[4];
+    Gtk::Label * pLabels[4];
     Gtk::Frame frame;            // Create a nice framed border for the box.
 };
 

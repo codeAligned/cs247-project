@@ -52,14 +52,14 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ),
 	std::cout<<"Finished loop"<<std::endl;
 	// Initialize the 5th card and place the image into the button.
 	//	card[4] = new Gtk::Image( cardPixbuf );	
-	button.set_image( *card[12] );	
+	// button.set_image( *card[12] );	
 	std::cout<<"Finished setting card"<<std::endl;
 
 	// Attach event listener to button
 	button.signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onButtonClicked));
 			
 	// Add the button to the box.
-	hboxClubs.add( button );
+	// hboxClubs.add( button );
 // -------------------------------------
 // UGLY TEMP CODE UNTIL I FIGURE THIS ARRAY SHIT
 
@@ -92,13 +92,37 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ),
 		card[i] = new Gtk::Image( nullCardPixbuf );
 		hboxSpades.add( *card[i] );
 	}
+
+// Adding player boxes
+	player_list = Gtk::manage(new Gtk::HBox());
+	vbox.pack_start( *player_list );
+
+	for (int i=0;i<4;i++){
+
+		player_modules[i] = Gtk::manage(new Gtk::VBox());
+		player_list->pack_start(*player_modules[i]);
+
+		pLabels[i] = new Gtk::Label("Player X");
+	    player_modules[i]->pack_start(*pLabels[i]);
+
+	    scoreLabels[i] = new Gtk::Label("Score: ");
+	    player_modules[i]->pack_start(*scoreLabels[i]);
+
+	    ragequitButtons[i] = new Gtk::Button("Rage");
+	    player_modules[i]->pack_start(*ragequitButtons[i]);
+	}
+
+    std::cout<<"Tried to make player module"<<std::endl;
+
 // Adding the hand
 	vbox.add( handLabel);
 	vbox.add( hboxHand );
 	// Initialize 13 empty cards and place them in the box.
 	for (int i = 0; i < 13; i++ ) {
-		hand[i] = new Gtk::Image( nullCardPixbuf );
-		hboxHand.add( *hand[i] );
+		handButtons[i] = new Gtk::Button();
+		handButtons[i]->set_image(*(new Gtk::Image(nullCardPixbuf)));
+		// card[i] = new Gtk::Image( nullCardPixbuf );
+		hboxHand.add(*handButtons[i]);
 	}
 	
 	// The final step is to display this newly created widget.
@@ -106,8 +130,9 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"),hboxClubs( true, 10 ),
 }
 
 Deck_Window::~Deck_Window() {
-	for (int i = 0; i < 52; i++ ) delete card[i];
-	for (int i = 0; i < 13; i++ ) delete hand[i];
+	//SHOULD DO THIS TODO
+	// for (int i = 0; i < 52; i++ ) delete card[i];
+	// for (int i = 0; i < 13; i++ ) delete hand[i];
 }
 
 void Deck_Window::onButtonClicked()
