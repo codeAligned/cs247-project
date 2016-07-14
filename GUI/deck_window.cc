@@ -39,6 +39,7 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"), hboxHand( true, 10 )
     control_panel.pack_start( nameField );
     nameField.set_text( "0" );
     control_panel.add(quit_game);
+    quit_game.signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onQuitGame));
 
 //Adding the played cards section -----------------------------------
     vbox.add(playedLabel);
@@ -83,6 +84,7 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"), hboxHand( true, 10 )
 	    player_modules[i]->pack_start(*scoreLabels[i]);
 
 	    ragequitButtons[i] = new Gtk::Button("Rage");
+	    ragequitButtons[i]->signal_clicked().connect( sigc::bind<int>( sigc::mem_fun(*this, &Deck_Window::onRagequit), i) );
 	    player_modules[i]->pack_start(*ragequitButtons[i]);
 	}
 
@@ -94,10 +96,14 @@ Deck_Window::Deck_Window() : playedLabel("Played cards:"), hboxHand( true, 10 )
 	// Initialize 13 empty cards and place them in the box.
 	for (int i = 0; i < 13; i++ ) {
 		handButtons[i] = new Gtk::Button();
+		// Glib::RefPtr<Gdk::Pixbuf> cardImg = deck.getCardImage( static_cast<Faces>(i), SPADE );
+		// handButtons[i]->set_image(*(new Gtk::Image(cardImg)));
 		handButtons[i]->set_image(*(new Gtk::Image(nullCardPixbuf)));
 		// card[i] = new Gtk::Image( nullCardPixbuf );
 		hboxHand.add(*handButtons[i]);
-		handButtons[i]->signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onButtonClicked));
+		// handButtons[i]->signal_clicked().connect(sigc::mem_fun( *this, &Deck_Window::onButtonClicked));
+		handButtons[i]->signal_clicked().connect( sigc::bind<int>( sigc::mem_fun(*this, &Deck_Window::onCardClicked), i) );
+		// handButtons[i]->signal_clicked().connect( sigc::bind<Glib::ustring>( sigc::mem_fun(*this, &Deck_Window::onCardClicked), "button 1") );
 	}
 	
 	// The final step is to display this newly created widget.
@@ -112,6 +118,18 @@ Deck_Window::~Deck_Window() {
 
 void Deck_Window::onNewGame(){
 	std::cout<<"New Game. Seed = "<< nameField.get_text() <<std::endl;
+}
+
+void Deck_Window::onQuitGame(){
+	std::cout<<"Quit Game."<<std::endl;
+}
+
+void Deck_Window::onCardClicked(int i){
+	std::cout<<"Card "<<i<< " clicked."<<std::endl;
+}
+
+void Deck_Window::onRagequit(int i){
+	std::cout<<"Player "<<i+1<< " ragequit."<<std::endl;
 }
 
 void Deck_Window::onButtonClicked()

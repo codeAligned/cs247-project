@@ -15,6 +15,9 @@ public:
     Deck_Window();
     void onButtonClicked();
     void onNewGame();
+    void onCardClicked(int);
+    void onRagequit(int);
+    void onQuitGame();
     virtual ~Deck_Window();
 	
 private:
