@@ -1,11 +1,14 @@
 #ifndef _ROUNDVIEW_
 #define _ROUNDVIEW_
 
+#include <gtkmm/main.h>
 #include <cstdlib>
 #include <vector>
 #include <iostream>
+#include <sstream>
 #include "Player.h"
 #include "Command.h"
+#include "deck_window.h"
 #include "Deck.h"
 
 class RoundView {

@@ -1,10 +1,12 @@
-#include <sstream>
 #include "RoundView.h"
+#include <gtkmm/main.h>
 
 using namespace std;
 
 RoundView::RoundView(int player_7spades) {
-    printNewRound(player_7spades);
+    Gtk::Main  kit( );      // Initialize gtkmm with the command line arguments, as appropriate.
+    Deck_Window window;                 // Create the window with the image.
+    Gtk::Main::run( window );
 }
 
 void RoundView::printNewRound(int player_7spades) const {
